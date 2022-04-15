@@ -11,10 +11,12 @@ meadow = ('клевер', 'одуванчик', 'ромашка', 'клевер'
 # garden_set =
 # meadow_set =
 # TODO здесь ваш код
-
+garden_set = set()
+meadow_set = set()
+garden_set.add(garden)
 # выведите на консоль все виды цветов
 # TODO здесь ваш код
-
+print(garden_set)
 # выведите на консоль те, которые растут и там и там
 # TODO здесь ваш код
 
