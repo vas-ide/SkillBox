@@ -47,9 +47,12 @@ store = {
 #     вывод на консоль количества и стоимости товара на складе
 
 # TODO здесь ваш код
-
-
-
-
+for  i in goods:
+    total_sum = 0
+    total_num = 0
+    for num, j in enumerate(store[goods[i]]):
+        total_num += store[goods[i]][num]['quantity']
+        total_sum += store[goods[i]][num]['quantity'] * store[goods[i]][num]['price']
+    print(i+':', 'в колличестве', total_num, 'шт. общая цена', total_sum)
 
 

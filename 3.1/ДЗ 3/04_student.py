@@ -13,13 +13,13 @@ educational_grant, expenses = 10000, 12000
 
 # TODO здесь ваш код
 month = 1
-differensis = 2000
-neded_money = 2000
+differece_money = 2000
+add_money = 2000
 while month <= 10:
     expenses += (expenses / 100) * 3
-    neded_money += (expenses / 100) * 3 + differensis
-    month +=1
-rezult = round(neded_money,2)
-print(f'Студенту надо просить {rezult} рублей')
-rezult = str(rezult)
-print('Студенту надо просить '+ rezult +' рублей')
+    add_money += (expenses / 100) * 3 + differece_money
+    month += 1
+full_add_money = round(add_money, 2)
+print(f'Студенту надо просить {full_add_money} рублей')
+full_add_money = str(full_add_money)
+print('Студенту надо просить ' + full_add_money + ' рублей')
