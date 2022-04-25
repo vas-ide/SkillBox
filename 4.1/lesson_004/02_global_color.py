@@ -19,7 +19,6 @@ import simple_draw as sd
 # TODO здесь ваш код
 
 import simple_draw as sd
-x = []
 
 def need_color():
     color_list = [sd.COLOR_RED, sd.COLOR_ORANGE, sd.COLOR_YELLOW, sd.COLOR_GREEN, sd.COLOR_CYAN, sd.COLOR_BLUE,
