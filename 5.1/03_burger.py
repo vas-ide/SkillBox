@@ -19,14 +19,16 @@
 
 from my_burger import bun, cutlets, cucumber, tomato, mayonnaise, cheese
 
-def get_burger():
+def my_burger():
     bun()
     cheese()
+    mayonnaise()
     cutlets()
     tomato()
     cucumber()
     cutlets()
+    mayonnaise()
     cheese()
     bun()
 
-get_burger()
+my_burger()
