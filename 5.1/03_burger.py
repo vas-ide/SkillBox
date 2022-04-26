@@ -16,3 +16,17 @@
 # Если не хватает инградиентов - создать соответствующие функции в модуле my_burger
 
 # TODO здесь ваш код
+
+from my_burger import bun, cutlets, cucumber, tomato, mayonnaise, cheese
+
+def get_burger():
+    bun()
+    cheese()
+    cutlets()
+    tomato()
+    cucumber()
+    cutlets()
+    cheese()
+    bun()
+
+get_burger()
