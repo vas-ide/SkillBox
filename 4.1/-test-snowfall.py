@@ -3,11 +3,13 @@
 import simple_draw as sd
 sd.resolution = (1200, 600)
 
-
 # На основе кода из практической части реализовать снегопад:
 # - создать списки данных для отрисовки N снежинок
 # - нарисовать падение этих N снежинок
 # - создать список рандомных длинн лучей снежинок (от 10 до 100) и пусть все снежинки будут разные
+
+N = 20
+
 # Пригодятся функции
 # sd.get_point()
 # sd.snowflake()
@@ -16,10 +18,8 @@ sd.resolution = (1200, 600)
 # sd.user_want_exit()
 
 # TODO здесь ваш код
-sd.resolution = (1200, 800)
-N = 20
-count = 2000
-def snowfall_initional(N=20):
+
+def snowfall_initional(N):
     def snowdrift():
         left_bottom = sd.get_point(100, -150)
         right_top = sd.get_point(550, 100)
@@ -28,10 +28,14 @@ def snowfall_initional(N=20):
     dict_x_snowfall = {}
     dict_y_snowfall = {}
     dict_len_snowfall = {}
-    for _ in range(count):
+    for _ in range(1000):
         dict_x_snowfall[_] = sd.random_number(-100, 1200)
         dict_y_snowfall[_] = sd.random_number(100, 600)
         dict_len_snowfall[_] = sd.random_number(10, 100)
+
+    dict_x_snowfall_upg = {}
+    dict_y_snowfall_upg = {}
+    dict_len_snowfall_upg = {}
 
     while True:
         sd.clear_screen()
@@ -43,25 +47,25 @@ def snowfall_initional(N=20):
             length = dict_len_snowfall[_]
             start_point = sd.get_point(x, y)
             sd.snowflake(center=start_point, length=length)
-            dict_x_snowfall[_] += sd.random_number(-15, 20)
-            dict_y_snowfall[_] -= 5
-            if y < 0:
-
-                del dict_x_snowfall[_]
-                del dict_y_snowfall[_]
-                del dict_len_snowfall_snowfall[_]
-
-
+            if y > 0:
+                dict_x_snowfall[_] += sd.random_number(-15, 15)
+                dict_y_snowfall[_] -= 5
+            # if y <= 0:
+            #     dict_x_snowfall_upg[_] = x
+            #     dict_y_snowfall_upg[_] = y
+            #     dict_len_snowfall_upg[_] = length
+            #     del dict_x_snowfall[_]
+            #     del dict_y_snowfall[_]
+            #     del dict_len_snowfall[_]
         sd.finish_drawing()
         sd.sleep(0.1)
-
-        if y < -10:
+        if y < -5:
             break
         if sd.user_want_exit():
             break
 
 # for _ in range(5):
-snowfall_initional()
+snowfall_initional(20)
 sd.pause()
 
 # подсказка! для ускорения отрисовки можно
