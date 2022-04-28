@@ -44,7 +44,14 @@ def draw_branches(start_point=sd.get_point(1000, 150), angle=90, length=150, del
     end_point_line = sd.get_point(1000, 0)
 
     sd.line(start_point=start_point_line, end_point=end_point_line, color=sd.COLOR_DARK_ORANGE, width=chickness)
+
+    start_point_line = sd.get_point(200, 450)
+    end_point_line = sd.get_point(200, 410)
+
+    sd.line(start_point=start_point_line, end_point=end_point_line, color=sd.COLOR_DARK_ORANGE, width=4)
+
 draw_branches(start_point=sd.get_point(1000, 150), angle=90, length=50)
+draw_branches(start_point=sd.get_point(200, 450), angle=90, length=25)
 
 
 
