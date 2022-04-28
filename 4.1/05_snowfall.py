@@ -21,8 +21,8 @@ N = 20
 
 def snowfall_initional(N):
     def snowdrift():
-        left_bottom = sd.get_point(100, -150)
-        right_top = sd.get_point(550, 100)
+        left_bottom = sd.get_point(1000, -150)
+        right_top = sd.get_point(1180, 40)
         sd.ellipse(left_bottom, right_top, color=sd.COLOR_WHITE)
 
     dict_x_snowfall = {}
