@@ -77,7 +77,3 @@ def giometry(angle=0, length=150, color=need_color()):
     hexagon(point_hexagon, angle=angle, length=length, color=color)
 
 giometry(25, 100)
-
-sd.pause()
-
-

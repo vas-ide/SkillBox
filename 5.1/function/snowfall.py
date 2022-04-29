@@ -3,8 +3,6 @@
 import simple_draw as sd
 sd.resolution = (1200, 600)
 
-N = 20
-
 def snowfall_initional(N):
     def snowdrift():
         left_bottom = sd.get_point(20, -100)
@@ -29,7 +27,7 @@ def snowfall_initional(N):
             length = dict_len_snowfall[_]
             start_point = sd.get_point(x, y)
             sd.snowflake(center=start_point, length=length)
-            if y > 0:
+            if y > -5:
                 dict_x_snowfall[_] += sd.random_number(-15, 15)
                 dict_y_snowfall[_] -= 5
         sd.finish_drawing()
@@ -38,7 +36,4 @@ def snowfall_initional(N):
             break
         if sd.user_want_exit():
             break
-
-snowfall_initional(20)
-sd.pause()
 

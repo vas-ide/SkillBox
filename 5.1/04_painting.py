@@ -23,21 +23,27 @@ import simple_draw as sd
 
 sd.resolution = (1200, 600)
 
-#from function.rainbow import bubble
-#from function.tree import draw_branches
-from function.snowfall import snowfall_initional
-
-sd.start_drawing()
-#bubble(point=sd.get_point(-400, -400), step=10)
-#snowfall_initional(20)
-draw_branches(start_point=sd.get_point(1000, 150), angle=90, length=50)
-draw_branches(start_point=sd.get_point(200, 450), angle=90, length=25)
-sd.finish_drawing()
+from function.rainbow_sun import bubble as rainbow, sun
+from function.tree import draw_branches as tree
+from function.snowfall import snowfall_initional as snowfall
+from function.house import house
 
 
+def print_picture():
+    snowfall(25)
+    house()
+    sun()
+    rainbow(point=sd.get_point(-400, -400), step=10)
+    tree(start_point=sd.get_point(1000, 150), angle=90, length=50)
+
+    # tree(start_point=sd.get_point(200, 450), angle=90, length=25)
 
 
 
+print_picture()
+
+
+sd.pause()
 
 # Усложненное задание (делать по желанию)
 # Анимировать картину.

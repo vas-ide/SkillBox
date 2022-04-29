@@ -4,7 +4,7 @@ import simple_draw as sd
 
 sd.resolution = (1200, 600)
 
-def draw_branches(start_point=sd.get_point(1000, 150), angle=90, length=150, delta=30):
+def draw_branches(start_point=sd.get_point(1000, 150), angle=90, length=50, delta=30):
     if length < 4:
         return
     chickness = int(length // 7 + 1)
@@ -23,6 +23,7 @@ def draw_branches(start_point=sd.get_point(1000, 150), angle=90, length=150, del
     def ran_angle():
         angle = sd.random_number(30, 40)
         return int(angle)
+    delta = ran_angle()
 
 
     v_right = sd.get_vector(start_point, angle=angle + delta, length=length, width=chickness)
@@ -45,16 +46,7 @@ def draw_branches(start_point=sd.get_point(1000, 150), angle=90, length=150, del
 
     sd.line(start_point=start_point_line, end_point=end_point_line, color=sd.COLOR_DARK_ORANGE, width=chickness)
 
-    start_point_line = sd.get_point(200, 450)
-    end_point_line = sd.get_point(200, 410)
-
-    sd.line(start_point=start_point_line, end_point=end_point_line, color=sd.COLOR_DARK_ORANGE, width=4)
-
-draw_branches(start_point=sd.get_point(1000, 150), angle=90, length=50)
-draw_branches(start_point=sd.get_point(200, 450), angle=90, length=25)
-
-
-
-sd.pause()
-
+    # start_point_line = sd.get_point(200, 450)
+    # end_point_line = sd.get_point(200, 410)
+    # sd.line(start_point=start_point_line, end_point=end_point_line, color=sd.COLOR_DARK_ORANGE, width=4)
 
