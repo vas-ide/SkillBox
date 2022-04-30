@@ -5,8 +5,8 @@ import simple_draw as sd
 
 def snowfall_initional(N):
     def snowdrift():
-        left_bottom = sd.get_point(20, -100)
-        right_top = sd.get_point(100, 40)
+        left_bottom = sd.get_point(-100, -100)
+        right_top = sd.get_point(350, 7)
         sd.ellipse(left_bottom, right_top, color=sd.COLOR_WHITE)
 
     dict_x_snowfall = {}
@@ -30,6 +30,12 @@ def snowfall_initional(N):
             if y > -5:
                 dict_x_snowfall[_] += sd.random_number(-15, 15)
                 dict_y_snowfall[_] -= 5
+            if x < 20:
+                dict_x_snowfall[_] += 20
+                dict_y_snowfall[_] -= 5
+            if y < -5:
+                dict_y_snowfall[_] = -5
+
         sd.finish_drawing()
         sd.sleep(0.1)
         if y < -5:

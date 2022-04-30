@@ -23,7 +23,7 @@ def smile(x=590, y=150, color=sd.COLOR_DARK_RED):
 def house():
     sd.resolution = (1200, 600)
     list_coor = [sd.get_point(350, 275), sd.get_point(825, 275), sd.get_point(585, 400)]
-    sd.lines(point_list=list_coor, color=sd.COLOR_YELLOW, closed=True, width=0)
+    roof = sd.lines(point_list=list_coor, color=sd.COLOR_YELLOW, closed=True, width=3)
 
     sd.line(start_point=sd.get_point(375, 25), end_point=sd.get_point(375, 275), width=3)
     sd.line(start_point=sd.get_point(800, 25), end_point=sd.get_point(800, 275), width=3)
@@ -56,7 +56,7 @@ def house():
 
     sd.rectangle(left_bottom=sd.get_point(490, 90), right_top=sd.get_point(690, 230),
                  color=sd.COLOR_DARK_YELLOW, width=0)
-    sd.rectangle(left_bottom=sd.get_point(0, 0), right_top=sd.get_point(1200, 25),
+    sd.rectangle(left_bottom=sd.get_point(250, 0), right_top=sd.get_point(1200, 25),
                  color=sd.COLOR_DARK_GREEN, width=0)
     smile()
 

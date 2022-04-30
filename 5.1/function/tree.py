@@ -48,3 +48,6 @@ def draw_branches(start_point=sd.get_point(1000, 150), angle=90, length=50, delt
     # end_point_line = sd.get_point(200, 410)
     # sd.line(start_point=start_point_line, end_point=end_point_line, color=sd.COLOR_DARK_ORANGE, width=4)
 
+def tree():
+
+    return draw_branches()
