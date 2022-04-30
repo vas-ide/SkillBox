@@ -30,15 +30,12 @@ from function.house import house
 
 
 def print_picture():
-    snowfall(25)
+    snowfall(20)
     house()
     sun()
     rainbow(point=sd.get_point(-400, -400), step=10)
     tree(start_point=sd.get_point(1000, 150), angle=90, length=50)
-
     # tree(start_point=sd.get_point(200, 450), angle=90, length=25)
-
-
 
 print_picture()
 
