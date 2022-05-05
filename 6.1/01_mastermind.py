@@ -45,25 +45,35 @@
 
 # TODO здесь ваш код...
 from mastermind_engine import generate_number, check_a_generated_number
-
-generate_number()
-
+from termcolor import cprint, colored
+couter = 0
+generate_number = generate_number()
+print(generate_number)
 while True:
-    input_number = int(input('Введите 4-х значное число без повторения символов !'))
+    global input_number
+    input_number = int(input(colored('Введите 4-х значное число без повторения символов '
+                                     'первая цифра числа отлична от нуля)!', color='blue')))
     if len(str(input_number)) == 4:
         input_number_str = str(input_number)
         value_set = set()
         for value in input_number_str:
             value_set.add(value)
         if len(value_set) == 4:
-            pass
-        else:
-            input_number = int(input('Некоректный ввод - "Введите 4-х значное число без повторения символов !"'))
-
-        print(len(value_set))
-        print(value_set)
-    else: 
-        input_number = int(input('Некоректный ввод - "Введите 4-х значное число без повторения символов !"'))
-
-
-    check_a_generated_number(input_number=input_number)
+            check_a_generated_number(input_number=input_number_str, generate_number=generate_number)
+            couter += 1
+            if str(generate_number) == input_number_str:
+                print(colored(f'Число ходов - {couter} Хотите ещё партию', color='magenta'))
+                break
+    elif len(str(input_number)) != 4:
+        input_number = int(input(colored('Некоректный ввод - "Введите 4-х значное число без повторения символов '
+                                         'первая цифра числа отлична от нуля)!"', color='red')))
+        input_number_str = str(input_number)
+        value_set = set()
+        for value in input_number_str:
+            value_set.add(value)
+        if len(value_set) == 4:
+            check_a_generated_number(input_number=input_number_str, generate_number=generate_number)
+            couter += 1
+            if str(generate_number) == input_number_str:
+                print(colored(f'Число ходов - {couter} Хотите ещё партию', color='magenta'))
+                break
