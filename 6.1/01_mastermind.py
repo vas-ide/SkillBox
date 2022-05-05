@@ -44,3 +44,26 @@
 # Точнее, в этом случае важен принцип единственной ответственности - https://goo.gl/rYb3hT
 
 # TODO здесь ваш код...
+from mastermind_engine import generate_number, check_a_generated_number
+
+generate_number()
+
+while True:
+    input_number = int(input('Введите 4-х значное число без повторения символов !'))
+    if len(str(input_number)) == 4:
+        input_number_str = str(input_number)
+        value_set = set()
+        for value in input_number_str:
+            value_set.add(value)
+        if len(value_set) == 4:
+            pass
+        else:
+            input_number = int(input('Некоректный ввод - "Введите 4-х значное число без повторения символов !"'))
+
+        print(len(value_set))
+        print(value_set)
+    else: 
+        input_number = int(input('Некоректный ввод - "Введите 4-х значное число без повторения символов !"'))
+
+
+    check_a_generated_number(input_number=input_number)
