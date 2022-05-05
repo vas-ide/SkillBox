@@ -23,7 +23,7 @@ import simple_draw as sd
 
 sd.resolution = (1200, 600)
 
-from function.rainbow_sun import bubble as rainbow, sun
+from function.rainbow_sun import weather
 from function.tree import draw_branches as tree
 from function.snowfall import snowfall_initional as snowfall
 from function.house import house
@@ -32,8 +32,7 @@ from function.house import house
 def print_picture():
     snowfall(20)
     house()
-    sun()
-    rainbow(point=sd.get_point(-400, -400), step=10)
+    weather()
     tree(start_point=sd.get_point(1000, 150), angle=90, length=50)
     # tree(start_point=sd.get_point(200, 450), angle=90, length=25)
 
