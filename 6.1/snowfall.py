@@ -4,8 +4,6 @@ from termcolor import cprint, colored
 
 def generate_snowflakes(N=100):
     global list_crd
-    global couter
-    couter = -1
     list_crd = []
     for _ in range(N):
         list_crd.append([sd.random_number(0, 1200), sd.random_number(200, 600), sd.random_number(10, 25)])
@@ -44,12 +42,12 @@ def touch_snowflakes():
 
 def numbers_overflight_snowflakes():
     for _ in range(len(list_crd)):
-        if list_crd[_][1] == 5:
-            print(list_crd[_])
+        if list_crd[_][1] <= 15:
+            print(f'{_}->->->{list_crd[_]}')
 
 
 def dell_snowflackes():
     for _ in range(len(list_crd)):
-        if list_crd[_][1] <= 5:
+        if list_crd[_][1] <= -80:
             list_crd.remove(list_crd[_])
             list_crd.append([sd.random_number(0, 1200), sd.random_number(200, 600), sd.random_number(10, 25)])
