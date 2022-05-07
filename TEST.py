@@ -4,6 +4,8 @@ from termcolor import cprint, colored
 
 def generate_snowflakes(N=100):
     global list_crd
+    global couter
+    couter = -1
     list_crd = []
     for _ in range(N):
         list_crd.append([sd.random_number(0, 1200), sd.random_number(200, 600), sd.random_number(10, 25)])
@@ -24,29 +26,34 @@ def generate_color_for_snowflakes(color=sd.COLOR_WHITE):
             color = int(input(colored('Введите выбранный цвет', color='magenta')))
 
 def snowflakes(color):
-    for _ in list_crd:
-        x = list_crd[_][0]
-        y = list_crd[_][1]
-        length = list_crd[_][2]
-        start_point = sd.get_point(x, y)
-        sd.snowflake(center=start_point, length=length, color=color)
+    for num in range(len(list_crd)):
+        start_point = sd.get_point(list_crd[num][0], list_crd[num][1])
+        sd.snowflake(center=start_point, length=list_crd[num][2], color=color)
 
-def touch_snowflakes(y_upd=5):
-    for _ in list_crd:
-        x = list_crd[_][0]
-        y = list_crd[_][1]
-        length = list_crd[_][2]
-        if y > 0:
+def touch_snowflakes():
+    for _ in range(len(list_crd)):
+        if list_crd[_][1] <= 10:
+            list_crd[_][1] -= 15
+        else:
+            list_crd[_][1] -= 15
+    for _ in range(len(list_crd)):
+        if -20 < list_crd[_][0] < 1220 and list_crd[_][1] > 5:
             list_crd[_][0] += sd.random_number(-15, 15)
-            list_crd[_][1] -= y_upd
-        if x <= 0 and y > 0:
-            list_crd[_][0] += sd.random_number(-15, 15)
-            list_crd[_][1] -= y_upd
-        if x > 1200 and y > 0:
-            list_crd[_][0] += sd.random_number(-15, 15)
-            list_crd[_][1] -= y_upd
-        if y < -5:
-            list_crd[_][1] = y_upd
+        else:
+            list_crd[_][0] += 0
+
+def numbers_overflight_snowflakes():
+    for _ in range(len(list_crd)):
+        if list_crd[_][1] == 5:
+            print(list_crd[_])
+
+
+def dell_snowflackes():
+    for _ in range(len(list_crd)):
+        if list_crd[_][1] <= 5:
+            list_crd.remove(list_crd[_])
+            list_crd.append([sd.random_number(0, 1200), sd.random_number(200, 600), sd.random_number(10, 25)])
+
 
 # def numbers_overflight_snowflakes():
 #     finished_snowflakes_dict = {}
