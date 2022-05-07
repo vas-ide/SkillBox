@@ -19,55 +19,63 @@ N = 20
 
 # TODO здесь ваш код
 def snowfall_initional(N):
-    list_x_snowfall = []
-    list_y_snowfall = []
-    list_len_snowfall = []
+    list_crd = []
+    list_snowdrift = []
+    couter = -1
+    stop_couter = 0
     for _ in range(N):
-        list_x_snowfall.append(sd.random_number(0, 1200))
-        list_y_snowfall.append(sd.random_number(15, 600))
-        list_len_snowfall.append(sd.random_number(10, 25))
+        list_crd.append([sd.random_number(0, 1200), sd.random_number(200, 600), sd.random_number(10, 25)])
     while True:
         sd.start_drawing()
         for _ in range(N):
-            x = list_x_snowfall[_]
-            y = list_y_snowfall[_]
-            length = list_len_snowfall[_]
+            x = list_crd[_][0]
+            y = list_crd[_][1]
+            length = list_crd[_][2]
             start_point = sd.get_point(x, y)
             sd.snowflake(center=start_point, length=length, color=sd.background_color)
         sd.finish_drawing()
         for _ in range(N):
-            if list_y_snowfall[_] <= 10:
-                list_y_snowfall[_] = 5
+            if list_crd[_][1] <= 10:
+                list_crd[_][1] = 5
             else:
-                list_y_snowfall[_] -= 5
+                list_crd[_][1] -= 5
         for _ in range(N):
-            if 0 < list_x_snowfall[_] < 1200 and list_y_snowfall[_] > 5:
-                list_x_snowfall[_] += sd.random_number(-15, 15)
+            if -20 < list_crd[_][0] < 1220 and list_crd[_][1] > 5:
+                list_crd[_][0] += sd.random_number(-15, 15)
             else:
-                list_x_snowfall[_] += 0
+                list_crd[_][0] += 0
 
-        for __ in range(N):
-            if __ <= 0:  # and __ not in list_y_snowfall[__]:
-                list_x_snowfall.append(sd.random_number(0, 1200))
-                list_y_snowfall.append(sd.random_number(15, 600))
-                list_len_snowfall.append(sd.random_number(10, 25))
+
+        for _ in range(N):
+            if list_crd[_][1] == 5:
+                list_snowdrift.append(list_crd[_])
+                list_crd.remove(list_crd[_])
+                list_crd.append([sd.random_number(0, 1200), sd.random_number(200, 600), sd.random_number(10, 25)])
                 couter += 1
+                stop_couter += 1
         sd.start_drawing()
         for _ in range(N):
-            x = list_x_snowfall[_]
-            y = list_y_snowfall[_]
-            length = list_len_snowfall[_]
+            x = list_crd[_][0]
+            y = list_crd[_][1]
+            length = list_crd[_][2]
+            start_point = sd.get_point(x, y)
+            sd.snowflake(center=start_point, length=length)
+        sd.finish_drawing()
+        sd.start_drawing()
+        for _ in range(couter):
+            x = list_snowdrift[_][0]
+            y = list_snowdrift[_][1]
+            length = list_snowdrift[_][2]
             start_point = sd.get_point(x, y)
             sd.snowflake(center=start_point, length=length)
         sd.finish_drawing()
         sd.sleep(0.1)
-        # if y < -5:
-        #     break
+        if stop_couter == 1500:
+            break
         if sd.user_want_exit():
             break
 
-
-snowfall_initional(100)
+snowfall_initional(N)
 sd.pause()
 
 # подсказка! для ускорения отрисовки можно

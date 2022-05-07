@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import simple_draw as sd
-from snowfall import generate_color_for_snowflakes, generate_snowflakes, touch_snowflakes, snowflakes_back, snowflakes
+from snowfall import generate_color_for_snowflakes, generate_snowflakes, touch_snowflakes, snowflakes, \
+    numbers_overflight_snowflakes, dell_snowflackes
 sd.resolution = (1200, 600)
 # На основе кода из lesson_004/05_snowfall.py
 # сделать модуль snowfall.py в котором реализовать следующие функции
@@ -16,7 +17,7 @@ sd.resolution = (1200, 600)
 
 # создать_снежинки(N)
 generate_snowflakes(50)
-generate_color_for_snowflakes()
+color = generate_color_for_snowflakes()
 while True:
     #  нарисовать_снежинки_цветом(color=sd.background_color)
     sd.start_drawing()
@@ -26,10 +27,12 @@ while True:
     touch_snowflakes()
     #  нарисовать_снежинки_цветом(color)
     sd.start_drawing()
-    snowflakes(color=sd.COLOR_RED)
+    snowflakes(color=color)
     sd.finish_drawing()
     #  если есть номера_достигших_низа_экрана() то
+    numbers_overflight_snowflakes()
     #       удалить_снежинки(номера)
+    dell_snowflackes()
     #       создать_снежинки(count)
     sd.sleep(0.1)
     if sd.user_want_exit():
