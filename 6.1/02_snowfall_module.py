@@ -32,7 +32,6 @@ while True:
     #  если есть номера_достигших_низа_экрана() то
     numbers_overflight_snowflakes()
     #       удалить_снежинки(номера)
-    dell_snowflackes()
     #       создать_снежинки(count)
     sd.sleep(0.1)
     if sd.user_want_exit():

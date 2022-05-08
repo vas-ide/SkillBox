@@ -40,14 +40,16 @@ def touch_snowflakes():
         else:
             list_crd[_][0] += 0
 
-def numbers_overflight_snowflakes():
-    for _ in range(len(list_crd)):
-        if list_crd[_][1] <= 15:
-            print(f'{_}->->->{list_crd[_]}')
-
-
 def dell_snowflackes():
     for _ in range(len(list_crd)):
         if list_crd[_][1] <= -80:
             list_crd.remove(list_crd[_])
             list_crd.append([sd.random_number(0, 1200), sd.random_number(200, 600), sd.random_number(10, 25)])
+
+
+def numbers_overflight_snowflakes():
+    for _ in range(len(list_crd)):
+        if -10 <= list_crd[_][1] <= 15:
+            print(f'{_}->->->{list_crd[_]}')
+            dell_snowflackes()
+
