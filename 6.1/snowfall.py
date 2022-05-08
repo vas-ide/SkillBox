@@ -50,6 +50,6 @@ def dell_snowflackes():
 def numbers_overflight_snowflakes():
     for _ in range(len(list_crd)):
         if -10 <= list_crd[_][1] <= 15:
-            print(f'{_}->->->{list_crd[_]}')
+            cprint(f'{_}->->->{list_crd[_]}', color='red')
             dell_snowflackes()
 

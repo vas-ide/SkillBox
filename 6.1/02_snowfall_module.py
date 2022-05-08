@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+from pprint import pprint
 
 import simple_draw as sd
+from termcolor import cprint, colored
 from snowfall import generate_color_for_snowflakes, generate_snowflakes, touch_snowflakes, snowflakes, \
     numbers_overflight_snowflakes, dell_snowflackes
 sd.resolution = (1200, 600)
@@ -16,7 +18,9 @@ sd.resolution = (1200, 600)
 # обращаясь ТОЛЬКО к функциям модуля snowfall
 
 # создать_снежинки(N)
-generate_snowflakes(50)
+cprint('Добро пожаловать', color='red')
+num = int(input(colored('Укажите колличество снежинок', color='green')))
+generate_snowflakes(num)
 color = generate_color_for_snowflakes()
 while True:
     #  нарисовать_снежинки_цветом(color=sd.background_color)
