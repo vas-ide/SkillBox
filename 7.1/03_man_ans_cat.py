@@ -49,16 +49,16 @@ class Man:
         return 'Я - {}, сытость {}'.format(self.name, self.fullness)
 
     def eat(self):
-        if self.house.food >= 10:
+        if self.house.refrigerator >= 10:
             cprint('{} поел'.format(self.name), color='yellow')
             self.fullness += 10
-            self.house.food -= 10
+            self.house.refrigerator -= 10
         else:
             cprint('{} нет еды'.format(self.name), color='red')
 
     def work(self):
         cprint('{} сходил на работу'.format(self.name), color='blue')
-        self.house.money += 150
+        self.house.table += 150
         self.fullness -= 10
 
     def upg_Python_and_other_knowledge(self):
@@ -66,15 +66,15 @@ class Man:
         self.fullness -= 10
 
     def shopping(self):
-        if self.house.money >= 50:
+        if self.house.table >= 50:
             cprint('{} сходил в магазин за едой'.format(self.name), color='magenta')
-            self.house.money -= 50
-            self.house.food += 50
+            self.house.table -= 50
+            self.house.refrigerator += 50
 
     def bay_cat_eat(self):
-        if self.house.money >= 50:
+        if self.house.table >= 50:
             cprint('{} сходил в магазин за едой кота'.format(self.name), color='magenta')
-            self.house.money -= 50
+            self.house.table -= 50
             self.house.cat_food += 50
 
     def cleaning(self):
@@ -98,14 +98,12 @@ class Man:
         dice = randint(1, 6)
         if self.fullness <= 20:
             self.eat()
-        elif self.house.money <= 100:
+        elif self.house.table <= 100:
             self.work()
-        elif self.house.food <= 50:
+        elif self.house.refrigerator <= 50:
             self.shopping()
         elif self.house.cat_food <= 50:
             self.bay_cat_eat()
-        elif self.house.money <= 100:
-            self.work()
         elif self.house.dirt >= 100:
             self.cleaning()
         elif dice == 1:
@@ -160,42 +158,41 @@ class Cat:
 class House:
 
     def __init__(self):
-        self.food = 50
-        self.money = 50
+        self.refrigerator = FOOD = 50
+        self.table = MONEY = 50
         self.cat_food = 0
         self.dirt = 0
 
     def __str__(self):
-        return 'В доме еды осталось {},Еды для кота {}, Денег осталось {}, Грязь {}'.format(self.food, self.cat_food,
-                                                                                            self.money, self.dirt)
+        return 'В доме еды осталось {},Еды для кота {}, Денег осталось {}, Грязь {}'\
+            .format(self.refrigerator, self.cat_food, self.table, self.dirt)
 
-
-vas = Man(name='VAS')
-vas_wife = Man(name='KSY')
-cat_bl = Cat(name='Black Cat')
-cat_wh = Cat(name='White Cat')
-cat_gr = Cat(name='Grey Cat')
 vas_home = House()
-vas.go_to_the_house(house=vas_home)
-vas_wife.go_to_the_house(house=vas_home)
-vas.give_home_cat(name_cat=cat_bl, house=vas_home)
-vas.give_home_cat(name_cat=cat_wh, house=vas_home)
-vas.give_home_cat(name_cat=cat_gr, house=vas_home)
+citizens = [
+    Man(name='VAS'),
+    Man(name='KSY')
+]
+cats = [
+    Cat(name='Black Cat'),
+    Cat(name='White Cat'),
+    Cat(name='Grey Cat')
+]
+
+for citisen in citizens:
+    citisen.go_to_the_house(house=vas_home)
+
+for cat in cats:
+    citizens[1].give_home_cat(name_cat=cat, house=vas_home)
 
 for day in range(1, 365):
     cprint('================ день {} =================='.format(day), color='yellow')
-    cprint(vas, color='cyan')
-    cprint(vas_wife, color='cyan')
-    cprint(cat_bl, color='cyan')
-    cprint(cat_wh, color='cyan')
-    cprint(cat_gr, color='cyan')
-    vas.act()
-    vas_wife.act()
-    cat_bl.act()
-    cat_wh.act()
-    cat_gr.act()
+    for citisen in citizens:
+        cprint(citisen, color='blue')
+        citisen.act()
+    for cat in cats:
+        cprint(cat, color='cyan')
+        cat.act()
     cprint(vas_home, color='green')
-
 # Создадим двух людей, живущих в одном доме - Бивиса и Батхеда
 # Нужен класс Дом, в нем должн быть холодильник с едой и тумбочка с деньгами
 # Еда пусть хранится в холодильнике в доме, а деньги - в тумбочке.
