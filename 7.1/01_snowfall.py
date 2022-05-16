@@ -10,8 +10,16 @@ import simple_draw as sd
 
 class Snowflake:
     pass
-
     # TODO здесь ваш код
+
+    def __init__(self):
+        self.list_crd = []
+        self.list_crd.append([sd.random_number(0, 1200), sd.random_number(200, 600), sd.random_number(10, 25)])
+
+    def clear_previous_picture(self):
+        for num in range(len(self.list_crd)):
+            start_point = sd.get_point(self.list_crd[num][0], self.list_crd[num][1])
+            sd.snowflake(center=start_point, length=self.list_crd[num][2], color=sd.background_color)
 
 
 flake = Snowflake()
