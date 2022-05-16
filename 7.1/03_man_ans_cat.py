@@ -96,13 +96,15 @@ class Man:
             cprint('{} умер...'.format(self.name), color='red')
             return
         dice = randint(1, 6)
-        if self.fullness < 30:
+        if self.fullness <= 20:
             self.eat()
-        elif self.house.food < 10:
+        elif self.house.money <= 100:
+            self.work()
+        elif self.house.food <= 50:
             self.shopping()
-        elif self.house.cat_food < 10:
+        elif self.house.cat_food <= 50:
             self.bay_cat_eat()
-        elif self.house.money < 50:
+        elif self.house.money <= 100:
             self.work()
         elif self.house.dirt >= 100:
             self.cleaning()
@@ -158,9 +160,9 @@ class Cat:
 class House:
 
     def __init__(self):
-        self.food = 40
-        self.money = 0
-        self.cat_food = 50
+        self.food = 50
+        self.money = 50
+        self.cat_food = 0
         self.dirt = 0
 
     def __str__(self):
