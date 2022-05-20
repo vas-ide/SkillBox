@@ -42,12 +42,12 @@ class Man:
 
     def __init__(self, name):
         self.name = name
-        self.fullness = 50
+        self.fullness = 30
         self.house = None
         self.python_upd = 0
 
     def __str__(self):
-        return 'Я - {}, сытость {}, Pytnon{}'.format(self.name, self.fullness, self.python_upd)
+        return 'Я - {}, сытость {}, Python-Skill {}'.format(self.name, self.fullness, self.python_upd)
 
     def eat(self):
         if self.house.food >= 10:
@@ -77,7 +77,7 @@ class Man:
         if self.house.money >= 50:
             cprint('{} сходил в магазин за едой кота'.format(self.name), color='magenta')
             self.house.table(-50)
-            self.house.cat_food += 50
+            self.house.storage(50)
 
     def cleaning(self):
         self.house.dirt -= 100
@@ -91,7 +91,7 @@ class Man:
 
     def give_home_cat(self, name_cat, house):
         name_cat.house = house
-        cprint('{} Въехал в дом'.format(name_cat.name), color='cyan')
+        cprint('{} Принят в дом'.format(name_cat.name), color='cyan')
 
     def act(self):
         if self.fullness <= 0:
@@ -121,15 +121,15 @@ class Cat:
     def __init__(self, name):
         self.name = name
         self.house = None
-        self.fullness = 50
+        self.fullness = 30
 
     def __str__(self):
         return 'Я - {}, сытость {}'.format(self.name, self.fullness)
 
     def eat(self):
         if self.house.cat_food >= 10:
-            self.fullness += 20
-            self.house.cat_food -= 10
+            self.fullness += 15
+            self.house.storage(-10)
             cprint(self.name + ' поел', color='blue')
         else:
             cprint('{} нет еды'.format(self.name), color='red')
@@ -150,18 +150,17 @@ class Cat:
         if self.fullness < 20:
             self.eat()
         if dice == 1:
-            self.sleep()
-        elif dice == 5:
-            self.eat()
-        else:
             self.pull_wallpaper()
+            self.sleep()
+        else:
+            self.sleep()
 
 
 class House:
 
     def __init__(self):
         self.food = 50
-        self.money = 50
+        self.money = 0
         self.cat_food = 0
         self.dirt = 0
 
@@ -174,6 +173,9 @@ class House:
 
     def table(self, money):
         self.money += money
+
+    def storage(self, cat_food):
+        self.cat_food += cat_food
 
 vas_home = House()
 citizens = [
