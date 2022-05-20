@@ -58,7 +58,7 @@ class Man:
 
     def work(self):
         cprint('{} сходил на работу'.format(self.name), color='blue')
-        self.house.table += 150
+        self.house.money += 150
         self.fullness -= 10
 
     def upg_Python_and_other_knowledge(self):
@@ -66,15 +66,15 @@ class Man:
         self.fullness -= 10
 
     def shopping(self):
-        if self.house.table >= 50:
+        if self.house.money >= 50:
             cprint('{} сходил в магазин за едой'.format(self.name), color='magenta')
-            self.house.table -= 50
+            self.house.money -= 50
             self.house.refrigerator += 50
 
     def bay_cat_eat(self):
-        if self.house.table >= 50:
+        if self.house.money >= 50:
             cprint('{} сходил в магазин за едой кота'.format(self.name), color='magenta')
-            self.house.table -= 50
+            self.house.money -= 50
             self.house.cat_food += 50
 
     def cleaning(self):
@@ -98,7 +98,7 @@ class Man:
         dice = randint(1, 6)
         if self.fullness <= 20:
             self.eat()
-        elif self.house.table <= 100:
+        elif self.house.money <= 100:
             self.work()
         elif self.house.refrigerator <= 50:
             self.shopping()
