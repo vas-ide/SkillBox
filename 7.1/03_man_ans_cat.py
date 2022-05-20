@@ -151,7 +151,6 @@ class Cat:
             self.eat()
         if dice == 1:
             self.pull_wallpaper()
-            self.sleep()
         else:
             self.sleep()
 
