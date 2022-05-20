@@ -42,40 +42,42 @@ class Man:
 
     def __init__(self, name):
         self.name = name
-        self.fullness = 50
+        self.fullness = 30
         self.house = None
+        self.python_upd = 0
 
     def __str__(self):
-        return 'Я - {}, сытость {}'.format(self.name, self.fullness)
+        return 'Я - {}, сытость {}, Python-Skill {}'.format(self.name, self.fullness, self.python_upd)
 
     def eat(self):
-        if self.house.refrigerator >= 10:
+        if self.house.food >= 10:
             cprint('{} поел'.format(self.name), color='yellow')
             self.fullness += 10
-            self.house.refrigerator -= 10
+            self.house.refrigerator(-10)
         else:
             cprint('{} нет еды'.format(self.name), color='red')
 
     def work(self):
         cprint('{} сходил на работу'.format(self.name), color='blue')
-        self.house.money += 150
+        self.house.table(150)
         self.fullness -= 10
 
     def upg_Python_and_other_knowledge(self):
         cprint('{} учил питон и основное програмирование'.format(self.name), color='green')
         self.fullness -= 10
+        self.python_upd += 10
 
     def shopping(self):
         if self.house.money >= 50:
             cprint('{} сходил в магазин за едой'.format(self.name), color='magenta')
-            self.house.money -= 50
-            self.house.refrigerator += 50
+            self.house.table(-50)
+            self.house.refrigerator(50)
 
     def bay_cat_eat(self):
         if self.house.money >= 50:
             cprint('{} сходил в магазин за едой кота'.format(self.name), color='magenta')
-            self.house.money -= 50
-            self.house.cat_food += 50
+            self.house.table(-50)
+            self.house.storage(50)
 
     def cleaning(self):
         self.house.dirt -= 100
@@ -89,7 +91,7 @@ class Man:
 
     def give_home_cat(self, name_cat, house):
         name_cat.house = house
-        cprint('{} Въехал в дом'.format(name_cat.name), color='cyan')
+        cprint('{} Принят в дом'.format(name_cat.name), color='cyan')
 
     def act(self):
         if self.fullness <= 0:
@@ -100,7 +102,7 @@ class Man:
             self.eat()
         elif self.house.money <= 100:
             self.work()
-        elif self.house.refrigerator <= 50:
+        elif self.house.food <= 50:
             self.shopping()
         elif self.house.cat_food <= 50:
             self.bay_cat_eat()
@@ -119,15 +121,15 @@ class Cat:
     def __init__(self, name):
         self.name = name
         self.house = None
-        self.fullness = 50
+        self.fullness = 30
 
     def __str__(self):
         return 'Я - {}, сытость {}'.format(self.name, self.fullness)
 
     def eat(self):
         if self.house.cat_food >= 10:
-            self.fullness += 20
-            self.house.cat_food -= 10
+            self.fullness += 25
+            self.house.storage(-10)
             cprint(self.name + ' поел', color='blue')
         else:
             cprint('{} нет еды'.format(self.name), color='red')
@@ -147,26 +149,33 @@ class Cat:
         dice = randint(1, 6)
         if self.fullness < 20:
             self.eat()
-        if dice == 1 or dice == 2:
-            self.sleep()
-        elif dice == 5 or dice == 6:
-            self.eat()
-        else:
+        if dice == 1:
             self.pull_wallpaper()
+            self.sleep()
+        else:
+            self.sleep()
 
 
 class House:
 
     def __init__(self):
-        self.refrigerator = FOOD = 50
-        self.table = MONEY = 50
+        self.food = 50
+        self.money = 0
         self.cat_food = 0
         self.dirt = 0
 
     def __str__(self):
         return 'В доме еды осталось {},Еды для кота {}, Денег осталось {}, Грязь {}'\
-            .format(self.refrigerator, self.cat_food, self.table, self.dirt)
+            .format(self.food, self.cat_food, self.money, self.dirt)
 
+    def refrigerator(self, food):
+        self.food += food
+
+    def table(self, money):
+        self.money += money
+
+    def storage(self, cat_food):
+        self.cat_food += cat_food
 
 vas_home = House()
 citizens = [
@@ -194,6 +203,9 @@ for day in range(1, 365):
         cprint(cat, color='cyan')
         cat.act()
     cprint(vas_home, color='green')
+
+
+
 # Создадим двух людей, живущих в одном доме - Бивиса и Батхеда
 # Нужен класс Дом, в нем должн быть холодильник с едой и тумбочка с деньгами
 # Еда пусть хранится в холодильнике в доме, а деньги - в тумбочке.
