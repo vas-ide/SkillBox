@@ -104,7 +104,7 @@ class Man:
             self.shopping()
         elif self.house.cat_food <= 50:
             self.bay_cat_eat()
-        elif self.house.dirt >= 100:
+        elif self.house.dirt >= 50:
             self.cleaning()
         elif dice == 1:
             self.work()
@@ -167,6 +167,7 @@ class House:
         return 'В доме еды осталось {},Еды для кота {}, Денег осталось {}, Грязь {}'\
             .format(self.refrigerator, self.cat_food, self.table, self.dirt)
 
+
 vas_home = House()
 citizens = [
     Man(name='VAS'),
@@ -178,17 +179,17 @@ cats = [
     Cat(name='Grey Cat')
 ]
 
-for citisen in citizens:
-    citisen.go_to_the_house(house=vas_home)
+for citizen in citizens:
+    citizen.go_to_the_house(house=vas_home)
 
 for cat in cats:
     citizens[1].give_home_cat(name_cat=cat, house=vas_home)
 
 for day in range(1, 365):
     cprint('================ день {} =================='.format(day), color='yellow')
-    for citisen in citizens:
-        cprint(citisen, color='blue')
-        citisen.act()
+    for citizen in citizens:
+        cprint(citizen, color='blue')
+        citizen.act()
     for cat in cats:
         cprint(cat, color='cyan')
         cat.act()
