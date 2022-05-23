@@ -44,11 +44,11 @@ from random import randint
 
 class Man:
 
-    def __init__(self, name):
+    def __init__(self, name, house):
         self.name = name
         self.fullness = 30
         self.happiness = 100
-        self.house = None
+        self.house = house
 
     def __str__(self):
         return '{}, Сытость - {}, Счастье - {}'.format(self.name, self.fullness, self.happiness)
@@ -85,7 +85,17 @@ class Husband(Man):
         return super().__str__()
 
     def act(self):
-        pass
+        dice = randint(1, 6)
+        if self.fullness < 10:
+            cprint('{} Умер от голода'.format(self.name), color='red')
+        elif self.fullness <= 30:
+            self.eat()
+        elif self.house.money <= 300:
+            self.work()
+        elif dice == 1 or dice == 2:
+            self.gaming()
+        else:
+            self.work()
 
     def eat(self):
         if self.house.food >= 30:
@@ -96,39 +106,63 @@ class Husband(Man):
             print('Еда закончилась ХОЧУ ЕСТЬ')
 
     def work(self):
-        pass
+        self.house.table(150)
+        self.fullness -= 10
+        print('ARBAITEN')
 
     def gaming(self):
-        pass
+        self.happiness += 20
+        self.fullness -= 10
+        print('ТАНКИ ГРЯЗИ НЕ БОЯТСЯ')
 
 
 class Wife(Man):
 
     def __init__(self, name):
         super().__init__(name)
+        self.coat = 0
 
     def __str__(self):
         return super().__str__()
 
     def act(self):
-        pass
+        if self.fullness < 10:
+            cprint('{} Умер от голода'.format(self.name), color='red')
+        elif self.fullness <= 30:
+            self.eat()
 
     def eat(self):
         if self.house.food >= 30:
             self.house.refrigerator(-30)
             self.fullness += 30
-            print('Поел - вкусно')
+            cprint('Поел - вкусно', color='yellow')
         else:
-            print('Еда закончилась ХОЧУ ЕСТЬ')
+            cprint('Еда закончилась ХОЧУ ЕСТЬ', color='red')
 
     def shopping(self):
-        pass
+        if self.house.food <= 150:
+            self.house.refrigerator(50)
+            self.house.table(-50)
+            self.fullness -= 10
+            cprint('Купила еды', color='yellow')
+        else:
+            self.fullness -= 10
+            cprint('Несмогла купить еды', color='red')
 
     def buy_fur_coat(self):
-        pass
+        if self.house.money >= 550:
+            self.happiness += 60
+            self.fullness -= 10
+            self.house.table(350)
+            self.coat += 1
+            print('Шуба')
+        else:
+            self.fullness -= 10
+            print('Дорогая эта шуба слишком мала')
 
     def clean_house(self):
-        pass
+        self.fullness -= 10
+        self.house.dirt = 0
 
 
 home = House()
