@@ -3,6 +3,7 @@
 from termcolor import cprint
 from random import randint
 
+
 ######################################################## Часть первая
 #
 # Создать модель жизни небольшой семьи.
@@ -47,6 +48,11 @@ class Man:
         self.name = name
         self.fullness = 30
         self.happiness = 100
+        self.house = None
+
+    def __str__(self):
+        return '{}, Сытость - {}, Счастье - {}'.format(self.name, self.fullness, self.happiness)
+
 
 class House:
 
@@ -69,10 +75,11 @@ class House:
     def storage(self, cat_food):
         self.cat_food += cat_food
 
-class Husband:
 
-    def __init__(self):
-        pass
+class Husband(Man):
+
+    def __init__(self, name):
+        super().__init__(name)
 
     def __str__(self):
         return super().__str__()
@@ -81,7 +88,12 @@ class Husband:
         pass
 
     def eat(self):
-        pass
+        if self.house.food >= 30:
+            self.house.refrigerator(-30)
+            self.fullness += 30
+            print('Поел - вкусно')
+        else:
+            print('Еда закончилась ХОЧУ ЕСТЬ')
 
     def work(self):
         pass
@@ -90,10 +102,10 @@ class Husband:
         pass
 
 
-class Wife:
+class Wife(Man):
 
-    def __init__(self):
-        pass
+    def __init__(self, name):
+        super().__init__(name)
 
     def __str__(self):
         return super().__str__()
@@ -102,7 +114,12 @@ class Wife:
         pass
 
     def eat(self):
-        pass
+        if self.house.food >= 30:
+            self.house.refrigerator(-30)
+            self.fullness += 30
+            print('Поел - вкусно')
+        else:
+            print('Еда закончилась ХОЧУ ЕСТЬ')
 
     def shopping(self):
         pass
@@ -115,16 +132,17 @@ class Wife:
 
 
 home = House()
-serge = Husband(name='VAS')
-masha = Wife(name='KSY')
+vas = Husband(name='VAS')
+ksy = Wife(name='KSY')
 
 for day in range(365):
     cprint('================== День {} =================='.format(day), color='red')
-    serge.act()
-    masha.act()
-    cprint(serge, color='cyan')
-    cprint(masha, color='cyan')
+    vas.act()
+    ksy.act()
+    cprint(vas, color='cyan')
+    cprint(ksy, color='cyan')
     cprint(home, color='cyan')
+
 
 # TODO после реализации первой части - отдать на проверку учителю
 
@@ -227,7 +245,6 @@ for day in range(365):
     cprint(kolya, color='cyan')
     cprint(murzik, color='cyan')
 
-
 # Усложненное задание (делать по желанию)
 #
 # Сделать из семьи любителей котов - пусть котов будет 3, или даже 5-10.
@@ -249,4 +266,3 @@ for day in range(365):
 #       for salary in range(50, 401, 50):
 #           max_cats = life.experiment(salary)
 #           print(f'При зарплате {salary} максимально можно прокормить {max_cats} котов')
-
