@@ -41,12 +41,33 @@ from random import randint
 #
 # Подвести итоги жизни за год: сколько было заработано денег, сколько сьедено еды, сколько куплено шуб.
 
+class Man:
+
+    def __init__(self, name):
+        self.name = name
+        self.fullness = 30
+        self.happiness = 100
 
 class House:
 
     def __init__(self):
-        pass
+        self.food = 100
+        self.money = 50
+        self.cat_food = 0
+        self.dirt = 0
 
+    def __str__(self):
+        return 'В доме еды осталось {},Еды для кота {}, Денег осталось {}, Грязь {}' \
+            .format(self.food, self.cat_food, self.money, self.dirt)
+
+    def refrigerator(self, food):
+        self.food += food
+
+    def table(self, money):
+        self.money += money
+
+    def storage(self, cat_food):
+        self.cat_food += cat_food
 
 class Husband:
 
@@ -94,8 +115,8 @@ class Wife:
 
 
 home = House()
-serge = Husband(name='Сережа')
-masha = Wife(name='Маша')
+serge = Husband(name='VAS')
+masha = Wife(name='KSY')
 
 for day in range(365):
     cprint('================== День {} =================='.format(day), color='red')
