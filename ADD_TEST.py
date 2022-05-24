@@ -144,6 +144,44 @@ class Wife(Man):
         self.fullness -= 10
         self.house.dirt = 0
 
+class Cat:
+
+    def __init__(self, name):
+        self.name = name
+        self.house = None
+        self.fullness = 30
+
+    def __str__(self):
+        return 'Я - {}, сытость {}'.format(self.name, self.fullness)
+
+    def act(self):
+        if self.fullness <= 0:
+            cprint('{} умер...'.format(self.name), color='red')
+        dice = randint(1, 6)
+        if self.fullness < 20:
+            self.eat()
+        if dice == 1:
+            self.pull_wallpaper()
+        else:
+            self.sleep()
+
+    def eat(self):
+        if self.house.cat_food >= 10:
+            self.fullness += 20
+            self.house.storage(-10)
+            cprint(self.name + ' поел', color='blue')
+        else:
+            cprint('{} нет еды'.format(self.name), color='red')
+
+    def sleep(self):
+        self.fullness -= 10
+        cprint(self.name + ' поспал', color='blue')
+
+    def pull_wallpaper(self):
+        self.fullness -= 10
+        self.house.dirt += 5
+        cprint(self.name + ' З____л драть обои', color='red')
+
 
 home = House()
 vas = Husband(name='VAS', house=home)
