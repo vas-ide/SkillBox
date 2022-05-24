@@ -58,6 +58,10 @@ class Man:
     def __str__(self):
         return '{}, Сытость - {}, Счастье - {}'.format(self.name, self.fullness, self.happiness)
 
+    def pitting_a_cat(self):
+        self.happiness += 5
+        self.fullness -= 10
+        cprint('Кот уважен !', color='magenta')
 
 class House:
 
@@ -84,6 +88,7 @@ class House:
         self.cat_food += cat_food
 
     def stat(self):
+
         cprint('{} - Денег заработано за год, {} - Съедено еды за год, {} - Куплено шуб'
               .format(self.money_in_year, self.food_in_year, self.coat_in_year), color='blue')
 
@@ -106,6 +111,8 @@ class Husband(Man):
             self.work()
         elif dice == 1 or dice == 2:
             self.gaming()
+        elif dice == 5:
+            self.pitting_a_cat()
         else:
             self.work()
 
@@ -122,12 +129,12 @@ class Husband(Man):
         self.house.table(150)
         self.fullness -= 10
         self.house.money_in_year += 150
-        print('ARBAITEN')
+        cprint('ARBAITEN', color='magenta')
 
     def gaming(self):
         self.happiness += 20
         self.fullness -= 10
-        print('ТАНКИ ГРЯЗИ НЕ БОЯТСЯ')
+        cprint('ТАНКИ ГРЯЗИ НЕ БОЯТСЯ', color='blue')
 
 
 class Wife(Man):
@@ -146,8 +153,12 @@ class Wife(Man):
             self.eat()
         elif self.house.food <= 150:
             self.shopping()
-        elif self.house.dirt >= 70:
+        elif self.house.dirt >= 80:
             self.clean_house()
+        elif self.house.cat_food <= 100:
+            self.bay_cat_food()
+        elif dice < 15:
+            self.pitting_a_cat()
         elif dice == 21:
             self.buy_fur_coat()
         else:
@@ -172,11 +183,18 @@ class Wife(Man):
             self.fullness -= 10
             cprint('Нет денег купить еды', color='red')
 
+    def bay_cat_food(self):
+        if self.house.money >= 50:
+            self.house.table(-50)
+            self.house.storage(50)
+            cprint('Контрольная закупка для кота', color='magenta')
+
+
     def buy_fur_coat(self):
         if self.house.money >= 550:
             self.happiness += 60
             self.fullness -= 10
-            self.house.table(-350)
+            self.house.table(350)
             self.house.coat_in_year += 1
             print('ШуБа')
         else:
@@ -188,18 +206,61 @@ class Wife(Man):
         self.house.dirt = 0
 
 
+class Cat:
+
+    def __init__(self, name, house):
+        self.name = name
+        self.house = house
+        self.fullness = 30
+
+    def __str__(self):
+        return 'Я - {}, сытость {}'.format(self.name, self.fullness)
+
+    def act(self):
+        if self.fullness <= 0:
+            cprint('{} умер...'.format(self.name), color='red')
+        dice = randint(1, 6)
+        if self.fullness < 20:
+            self.eat()
+        if dice == 1:
+            self.pull_wallpaper()
+        else:
+            self.sleep()
+
+    def eat(self):
+        if self.house.cat_food >= 10:
+            self.fullness += 20
+            self.house.storage(-10)
+            cprint(self.name + ' поел', color='blue')
+        else:
+            cprint('{} нет еды'.format(self.name), color='red')
+
+    def sleep(self):
+        self.fullness -= 10
+        cprint(self.name + ' поспал', color='blue')
+
+    def pull_wallpaper(self):
+        self.fullness -= 10
+        self.house.dirt += 5
+        cprint(self.name + ' З____л драть обои', color='red')
+
+
 home = House()
 vas = Husband(name='VAS', house=home)
 ksy = Wife(name='KSY', house=home)
+cat = Cat(name='Чернышь', house=home)
 
 for day in range(365):
     cprint('================== День {} =================='.format(day), color='red')
     vas.act()
     ksy.act()
+    cat.act()
     cprint(vas, color='cyan')
     cprint(ksy, color='cyan')
+    cprint(cat, color='cyan')
     cprint(home, color='cyan')
 home.stat()
+
 
 
 
@@ -231,22 +292,22 @@ home.stat()
 # Если кот дерет обои, то грязи становится больше на 5 пунктов
 
 
-class Cat:
-
-    def __init__(self):
-        pass
-
-    def act(self):
-        pass
-
-    def eat(self):
-        pass
-
-    def sleep(self):
-        pass
-
-    def soil(self):
-        pass
+# class Cat:
+#
+#     def __init__(self):
+#         pass
+#
+#     def act(self):
+#         pass
+#
+#     def eat(self):
+#         pass
+#
+#     def sleep(self):
+#         pass
+#
+#     def soil(self):
+#         pass
 
 
 ######################################################## Часть вторая бис
