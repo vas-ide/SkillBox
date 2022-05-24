@@ -40,9 +40,8 @@ class House:
         self.cat_food += cat_food
 
     def stat(self):
-
-        print('{} - Денег заработано за год, {} - Съедено еды за год, {} - Куплено шуб'
-              .format(self.money_in_year, self.food_in_year, self.coat_in_year))
+        cprint('{} - Денег заработано за год, {} - Съедено еды за год, {} - Куплено шуб'
+              .format(self.money_in_year, self.food_in_year, self.coat_in_year), color='blue')
 
 
 class Husband(Man):
@@ -79,12 +78,12 @@ class Husband(Man):
         self.house.table(150)
         self.fullness -= 10
         self.house.money_in_year += 150
-        print('ARBAITEN')
+        cprint('ARBAITEN', color='magenta')
 
     def gaming(self):
         self.happiness += 20
         self.fullness -= 10
-        print('ТАНКИ ГРЯЗИ НЕ БОЯТСЯ')
+        cprint('ТАНКИ ГРЯЗИ НЕ БОЯТСЯ', color='magenta')
 
 
 class Wife(Man):
@@ -96,7 +95,7 @@ class Wife(Man):
         return super().__str__()
 
     def act(self):
-        dice = randint(1, 6)
+        dice = randint(1, 21)
         if self.fullness < 10:
             cprint('{} Умела от голода'.format(self.name), color='red')
         elif self.fullness <= 30:
@@ -105,7 +104,7 @@ class Wife(Man):
             self.shopping()
         elif self.house.dirt >= 70:
             self.clean_house()
-        elif dice == 5:
+        elif dice == 21:
             self.buy_fur_coat()
         else:
             self.clean_house()
@@ -133,7 +132,7 @@ class Wife(Man):
         if self.house.money >= 550:
             self.happiness += 60
             self.fullness -= 10
-            self.house.table(350)
+            self.house.table(-350)
             self.house.coat_in_year += 1
             print('ШуБа')
         else:
@@ -143,6 +142,7 @@ class Wife(Man):
     def clean_house(self):
         self.fullness -= 10
         self.house.dirt = 0
+        cprint('Cleaning procidure', color='white')
 
 
 class Child(Man):
@@ -154,13 +154,26 @@ class Child(Man):
         return super().__str__()
 
     def act(self):
-        pass
+        if self.fullness < 10:
+            cprint('{} DEAD '.format(self.name), color='red')
+        else:
+            if 10 <= self.fullness <= 50:
+                self.eat()
+            else:
+                self.sleep()
 
     def eat(self):
-        pass
+        if self.house.food >= 10:
+            self.house.refrigerator(10)
+            self.fullness += 10
+            cprint('{} ПОЕЛ'.format(self.name), color='yellow')
+        else:
+            cprint('{} нехватает еды '.format(self.name), color='red')
 
     def sleep(self):
-        pass
+        self.fullness -= 10
+        cprint('{} ПОСПАЛ '.format(self.name), color='yellow')
+
 
 home = House()
 vas = Husband(name='VAS', house=home)
