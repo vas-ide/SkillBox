@@ -145,16 +145,36 @@ class Wife(Man):
         self.house.dirt = 0
 
 
+class Child(Man):
+
+    def __init__(self, name, house):
+        super().__init__(name, house)
+
+    def __str__(self):
+        return super().__str__()
+
+    def act(self):
+        pass
+
+    def eat(self):
+        pass
+
+    def sleep(self):
+        pass
+
 home = House()
 vas = Husband(name='VAS', house=home)
 ksy = Wife(name='KSY', house=home)
+leo = Child(name='LEO', house=home)
 
 for day in range(365):
     cprint('================== День {} =================='.format(day), color='red')
     vas.act()
     ksy.act()
+    leo.act()
     cprint(vas, color='cyan')
     cprint(ksy, color='cyan')
+    cprint(leo, color='cyan')
     cprint(home, color='cyan')
 home.stat()
 
