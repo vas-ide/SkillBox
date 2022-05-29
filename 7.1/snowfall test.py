@@ -1,24 +1,23 @@
 # -*- coding: utf-8 -*-
 
 import simple_draw as sd
-
 sd.resolution = (1200, 600)
-count = N = int(input('Введите количество снежинок'))
-
-class Snowflake:
-    pass
+# Шаг 1: Реализовать падение снежинки через класс. Внести в методы:
+#  - создание снежинки с нужными параметрами
+#  - отработку изменений координат
+#  - отрисовку
 
     # TODO здесь ваш код
 
+
+class Snowflake:
+
     def __init__(self):
         self.list_crd = [sd.random_number(0, 1200), sd.random_number(200, 600), sd.random_number(10, 25)]
-        self.air = None
-
 
     def clear_previous_picture(self):
         start_point = sd.get_point(self.list_crd[0], self.list_crd[1])
         sd.snowflake(center=start_point, length=self.list_crd[2], color=sd.background_color)
-
 
     def move(self):
         for _ in range(len(self.list_crd)):
@@ -32,30 +31,39 @@ class Snowflake:
             else:
                 self.list_crd[0] += 0
 
-
     def draw(self):
         start_point = sd.get_point(self.list_crd[0], self.list_crd[1])
         sd.snowflake(center=start_point, length=self.list_crd[2])
-
 
     def can_fall(self):
         if self.list_crd is not None:
             return True
 
-flake = Snowflake()
 
-while True:
-    flake.clear_previous_picture()
-    flake.move()
-    flake.draw()
-    if not flake.can_fall():
-        break
-    sd.sleep(0.1)
-    if sd.user_want_exit():
-        break
 
+
+
+# flake = Snowflake()
+#
+# while True:
+#     flake.clear_previous_picture()
+#     flake.move()
+#     flake.draw()
+#     if not flake.can_fall():
+#         break
+#     sd.sleep(0.1)
+#     if sd.user_want_exit():
+#         break
 
 # шаг 2: создать снегопад - список объектов Снежинка в отдельном списке, обработку примерно так:
+def get_flakes(count=N):
+    global snowflakes_list
+    snowflakes_list = []
+    for i in range(N):
+        flakes_i = Snowflake()
+
+
+
 # flakes = get_flakes(count=N)  # создать список снежинок
 # while True:
 #     for flake in flakes:
@@ -68,5 +76,5 @@ while True:
 #     sd.sleep(0.1)
 #     if sd.user_want_exit():
 #         break
-
+count = N = 100  # int(input('Введите количество снежинок'))
 sd.pause()
