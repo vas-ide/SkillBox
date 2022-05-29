@@ -61,7 +61,7 @@ class Man:
     def pitting_a_cat(self):
         self.happiness += 5
         self.fullness -= 10
-        cprint('Кот уважен !', color='magenta')
+        cprint(f'{self.name} Кот уважен !', color='magenta')
 
 class House:
 
@@ -119,21 +119,21 @@ class Husband(Man):
         if self.house.food >= 30:
             self.house.refrigerator(-30)
             self.fullness += 30
-            cprint('Поел - вкусно', color='yellow')
+            cprint(f'{self.name} Поел - вкусно', color='yellow')
             self.house.food_in_year += 30
         else:
-            cprint('Еда закончилась ХОЧУ ЕСТЬ', color='red')
+            cprint(f'{self.name} Еда закончилась ХОЧУ ЕСТЬ', color='red')
 
     def work(self):
         self.house.table(150)
         self.fullness -= 10
         self.house.money_in_year += 150
-        cprint('ARBAITEN', color='magenta')
+        cprint(f'{self.name} ARBAITEN', color='magenta')
 
     def gaming(self):
         self.happiness += 20
         self.fullness -= 10
-        cprint('ТАНКИ ГРЯЗИ НЕ БОЯТСЯ', color='magenta')
+        cprint(f'{self.name} ТАНКИ ГРЯЗИ НЕ БОЯТСЯ', color='magenta')
 
 
 class Wife(Man):
@@ -167,26 +167,26 @@ class Wife(Man):
         if self.house.food >= 30:
             self.house.refrigerator(-30)
             self.fullness += 30
-            cprint('Поел - вкусно', color='yellow')
+            cprint(f'{self.name} Поел - вкусно', color='yellow')
             self.house.food_in_year += 30
         else:
-            cprint('Еда закончилась ХОЧУ ЕСТЬ', color='red')
+            cprint(f'{self.name} Еда закончилась ХОЧУ ЕСТЬ', color='red')
 
     def shopping(self):
         if self.house.food <= 150:
             self.house.refrigerator(50)
             self.house.table(-50)
             self.fullness -= 10
-            cprint('Купила еды', color='yellow')
+            cprint(f'{self.name} Купила еды', color='yellow')
         else:
             self.fullness -= 10
-            cprint('Нет денег купить еды', color='red')
+            cprint(f'{self.name} Нет денег купить еды', color='red')
 
     def bay_cat_food(self):
         if self.house.money >= 50:
             self.house.table(-50)
             self.house.storage(50)
-            cprint('Контрольная закупка для кота', color='magenta')
+            cprint(f'{self.name} Контрольная закупка для кота', color='magenta')
 
 
     def buy_fur_coat(self):
@@ -203,7 +203,7 @@ class Wife(Man):
     def clean_house(self):
         self.fullness -= 10
         self.house.dirt = 0
-        cprint('Cleaning procidure', color='white')
+        cprint( f'{self.name} Cleaning procidure', color='white')
 
 
 class Child(Man):
