@@ -247,12 +247,12 @@ class Cat:
         return 'Я - {}, сытость {}'.format(self.name, self.fullness)
 
     def act(self):
+        dice = randint(1, 6)
         if self.fullness <= 0:
             cprint('{} умер...'.format(self.name), color='red')
-        dice = randint(1, 6)
-        if self.fullness < 20:
+        elif self.fullness < 20:
             self.eat()
-        if dice == 1:
+        elif dice == 1:
             self.pull_wallpaper()
         else:
             self.sleep()
