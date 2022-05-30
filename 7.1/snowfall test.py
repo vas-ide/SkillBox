@@ -68,9 +68,10 @@ def get_flakes(N):
 
 def get_fallen_flakes():
     numbers_fallen_flakes = 0
-    for i in snowflakes_list:
+    for i in flakes:
         if i.list_crd[1] <= 10:
-            del flakes[i]
+            # flakes.pop(i)
+            # del flakes[i]
             numbers_fallen_flakes += 1
     print(numbers_fallen_flakes)
     return numbers_fallen_flakes
@@ -86,7 +87,7 @@ while True:
     fallen_flakes = get_fallen_flakes()  # подчитать сколько снежинок уже упало
     if fallen_flakes:
         for i in range(fallen_flakes):
-            snowflakes_list.append(Snowflake())
+            flakes.append(Snowflake())
         # append_flakes(count=fallen_flakes)  # добавить еще сверху
     sd.sleep(0.1)
     if sd.user_want_exit():
