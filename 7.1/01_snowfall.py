@@ -56,7 +56,6 @@ class Snowflake:
 #         break
 
 # шаг 2: создать снегопад - список объектов Снежинка в отдельном списке, обработку примерно так:
-count = N = 100 #int(input('Введите количество снежинок'))
 
 
 def get_flakes(N):
@@ -69,12 +68,19 @@ def get_flakes(N):
 def get_fallen_flakes():
     numbers_fallen_flakes = 0
     for i in flakes:
-        if i.list_crd[1] <= 10:
+        if i.list_crd[1] <= 15: # можно сделать сугроб
+            flakes.remove(i)
             # flakes.pop(i)
             # del flakes[i]
             numbers_fallen_flakes += 1
     print(numbers_fallen_flakes)
     return numbers_fallen_flakes
+
+def append_flakes(count):
+    for i in range(fallen_flakes):
+        flakes.append(Snowflake())
+
+count = N = 100 #int(input('Введите количество снежинок'))
 
 flakes = get_flakes(N)  # создать список снежинок
 
@@ -86,9 +92,7 @@ while True:
         flake.draw()
     fallen_flakes = get_fallen_flakes()  # подчитать сколько снежинок уже упало
     if fallen_flakes:
-        for i in range(fallen_flakes):
-            flakes.append(Snowflake())
-        # append_flakes(count=fallen_flakes)  # добавить еще сверху
+        append_flakes(count=fallen_flakes)  # добавить еще сверху
     sd.sleep(0.1)
     if sd.user_want_exit():
         break
