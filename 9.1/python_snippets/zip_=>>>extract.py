@@ -13,24 +13,3 @@ for filename in zip_file.namelist():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
