@@ -1,4 +1,5 @@
 import zipfile
+from pprint import pprint
 
 zip_file_1984 = '1984-pdf.zip'
 zip_file = zipfile.ZipFile(zip_file_1984, 'r')
@@ -10,8 +11,22 @@ for filename in zip_file.namelist():
     print(f'{filename:<50}')
     zip_file.extract(filename)
 
+file_name = '1984. Джордж Оруэлл.txt'
+stat = {}
+prev_char = ' '
+with open(file_name, 'r', encoding='utf-8') as file:
+    for line in file:
+        for char in line:
+            if prev_char in stat:
+                if char in stat[prev_char]:
+                    stat[prev_char][char] += 1
+                else:
+                    stat[prev_char][char] = 1
+            else:
+                stat[prev_char] = {char: 1}
+            prev_char = char
 
-
+pprint(stat)
 
 
 

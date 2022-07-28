@@ -11,5 +11,14 @@ for filename in zip_file.namelist():
     zip_file.extract(filename)
 
 
+file_name = '1984. Джордж Оруэлл.txt'
+stat = {}
+prev_char = ' '
+with open(file_name, 'r', encoding='utf-8') as file:
+    for line in file:
+        print(line)
+
+
+
 
 
