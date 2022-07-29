@@ -14,41 +14,40 @@ for filename in zip_file.namelist():
 
 file_name = '1984. Джордж Оруэлл.txt'
 stat = {}
-sequence = '   '
-with open(file_name, 'r', encoding='UTF-8') as file:
+prev_char = ' '
+with open(file_name, 'r', encoding='utf-8') as file:
     for line in file:
         for char in line:
-            if sequence in stat:
-                if char in stat[sequence]:
-                    stat[sequence][char] += 1
+            if prev_char in stat:
+                if char in stat[prev_char]:
+                    stat[prev_char][char] += 1
                 else:
-                    stat[sequence][char] = 1
+                    stat[prev_char][char] = 1
             else:
-                stat[sequence] = {char: 1}
-            sequence = sequence[1:] + char
+                stat[prev_char] = {char: 1}
+            prev_char = char
 
-# pprint(stat)
-# pprint(f'{len(stat)}')
+#pprint(stat)
 
 totals = {}
 stat_for_generate = {}
-for sequence, char_stat in stat.items():
-    totals[sequence] = 0
-    stat_for_generate[sequence] = []
+for prev_char, char_stat in stat.items():
+    totals[prev_char] = 0
+    stat_for_generate[prev_char] = []
     for char, count in char_stat.items():
-        totals[sequence] += count
-        stat_for_generate[sequence].append([count, char])
-    stat_for_generate[sequence].sort(reverse=True)
+        totals[prev_char] += count
+        stat_for_generate[prev_char].append([count, char])
+    stat_for_generate[prev_char].sort(reverse=True)
 
-# pprint(totals)
-# pprint(stat_for_generate)
+#pprint(totals)
+#pprint(stat_for_generate)
 
 N = 1000
 printed = 0
-sequence = '   '
+prev_char = ' '
 while printed < N:
-    char_stat = stat_for_generate[sequence]
-    total = totals[sequence]
+    char_stat = stat_for_generate[prev_char]
+    total = totals[prev_char]
     dice = randint(1, total)
     pos = 0
     for count, char in char_stat:
@@ -57,7 +56,8 @@ while printed < N:
             break
     print(char, end='')
     printed += 1
-    sequence = sequence[1:] + char
+    prev_char = char
+
 
 
 
