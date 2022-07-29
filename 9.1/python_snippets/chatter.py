@@ -19,7 +19,7 @@ class Chatter:
         if self.file_name.endswith('.zip'):
             self.unzip()
         sequence = ' ' * self.analize_count
-        with open(self.file_name, 'r', encoding='UTF-8') as file:
+        with open(self.file_name, 'r', encoding='utf8') as file:
             for line in file:
                 line = line[:-1]
                 for char in line:
@@ -44,9 +44,13 @@ class Chatter:
             self.stat_for_generate[sequence].sort(reverse=True)
 
 
-    def chatter(self, N):
+    def chatter(self, N, out_file_name=None):
         N = 1000
         printed = 0
+        if out_file_name is not None:
+            file = open(out_file_name, 'w', encoding='utf8')
+        else:
+            file = None
 
         sequence = ' ' * self.analize_count
         spaces_printed = 0
@@ -59,23 +63,30 @@ class Chatter:
                 pos += count
                 if dice <= pos:
                     break
-            print(char, end='')
+            if file:
+                file.write(char)
+            else:
+                print(char, end='')
             if char == ' ':
                 spaces_printed += 1
                 if spaces_printed >= 10:
-                    print()
+                    if file:
+                        file.write('\n')
+                    else:
+                        print()
                     spaces_printed = 0
             printed += 1
             sequence = sequence[1:] + char
+        if file:
+            file.close()
 
 
 
 chatterer = Chatter(file_name='1984-txt.zip')
-chatterer = Chatter(file_name='1984. Джордж Оруэлл.txt')
-
+# chatterer = Chatter(file_name='1984. Джордж Оруэлл.txt')
 chatterer.collect()
 chatterer.preparation()
-chatterer.chatter(N=10000)
+chatterer.chatter(N=10000, out_file_name='chat.txt')
 
 
 
