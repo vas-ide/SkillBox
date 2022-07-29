@@ -14,9 +14,12 @@ for filename in zip_file.namelist():
 
 file_name = '1984. Джордж Оруэлл.txt'
 stat = {}
-sequence = '   '
+
+analize_count = 10
+sequence = ' ' * analize_count
 with open(file_name, 'r', encoding='UTF-8') as file:
     for line in file:
+        line = line[:-1]
         for char in line:
             if sequence in stat:
                 if char in stat[sequence]:
@@ -45,7 +48,8 @@ for sequence, char_stat in stat.items():
 
 N = 1000
 printed = 0
-sequence = '   '
+sequence = ' ' * analize_count
+spaces_printed = 0
 while printed < N:
     char_stat = stat_for_generate[sequence]
     total = totals[sequence]
@@ -56,6 +60,11 @@ while printed < N:
         if dice <= pos:
             break
     print(char, end='')
+    if char == ' ':
+        spaces_printed += 1
+        if spaces_printed >= 10:
+            print()
+            spaces_printed = 0
     printed += 1
     sequence = sequence[1:] + char
 
