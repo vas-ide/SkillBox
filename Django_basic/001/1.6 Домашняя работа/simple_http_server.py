@@ -1,7 +1,7 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 APP_HOST = 'localhost'
-APP_PORT = 8000
+APP_PORT = 8002
 
 
 class SimpleGetHandler(BaseHTTPRequestHandler):
@@ -20,9 +20,7 @@ class SimpleGetHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         self._set_headers()
-        message = f'Hello my name Alex' \
-                  f'I have wife and son' \
-                  f'i\'m 35 ears old'
+        message = f'Hello, world '
         self.wfile.write(self._html(message))
 
 
