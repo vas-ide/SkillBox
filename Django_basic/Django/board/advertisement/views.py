@@ -13,6 +13,8 @@ def advertisement_list(request, *args, **kwargs):
 #                         '<li>Строительныйе работы.</li>'
 #                         '</ul>')
 
+def advertisement_upd(request, *args, **kwargs):
+    return render(request, 'advertisement/advertisement_upd.html', {})
 # def advertisement_upd(request, *args, **kwargs):
 #     return HttpResponse('<ul>'
 #                         '<li>Мастер по ремонту бытовой техники.</li>'
