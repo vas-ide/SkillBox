@@ -9,3 +9,23 @@ def advertisement_list(request, *args, **kwargs):
 
 def advertisement_upd(request, *args, **kwargs):
     return render(request, 'advertisement/advertisement_upd.html', {})
+
+
+def repair(request, *args, **kwargs):
+    return render(request, 'advertisement/repair.html', {})
+
+
+def veterinary(request, *args, **kwargs):
+    return render(request, 'advertisement/veterinary.html', {})
+
+
+def plumber(request, *args, **kwargs):
+    return render(request, 'advertisement/plumber.html', {})
+
+
+def construction(request, *args, **kwargs):
+    return render(request, 'advertisement/construction.html', {})
+
+
+def excavator(request, *args, **kwargs):
+    return render(request, 'advertisement/excavator.html', {})
