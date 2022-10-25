@@ -9,7 +9,3 @@ def advertisement_list(request, *args, **kwargs):
 
 def advertisement_upd(request, *args, **kwargs):
     return render(request, 'advertisement/advertisement_upd.html', {})
-
-
-def veterinary_site(request, *args, **kwargs):
-    return render(request, 'veterinary/veterinary_site.html', {})
