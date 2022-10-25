@@ -4,6 +4,6 @@ from .import views
 
 urlpatterns = [
     path("", views.advertisement_list, name='advertisement_list'),
-    # path('advertisement/', views.advertisement_list, name='advertisement_list')
-    path('advertisement/', views.advertisement_upd, name='advertisement_upd')
+    path('advertisement/', views.advertisement_upd, name='advertisement_upd'),
+    path('veterinary/', views.veterinary_site, name='veterinary_site')
 ]
