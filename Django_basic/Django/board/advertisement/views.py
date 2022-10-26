@@ -3,6 +3,11 @@ from django.shortcuts import render
 # Create your views here.
 
 
+def get_client_ip(request):
+    ip = request.META.get('REMOTE_ADDR')
+    return render(request, 'advertisement/advertisement_upd.html', {'ip_address': ip})
+
+
 def advertisement_list(request, *args, **kwargs):
     return render(request, 'advertisement/advertisement_list.html', {})
 
