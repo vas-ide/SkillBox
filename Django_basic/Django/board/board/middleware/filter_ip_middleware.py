@@ -6,6 +6,7 @@ import time
 class FilterIPMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
+        self.counter = 0
 
     def __call__(self, request):
 
@@ -20,5 +21,10 @@ class FilterIPMiddleware:
         response = self.get_response(request)
         # time.sleep(1)
 
+        # if self.counter == 3:
+        #     time.sleep(2)
+        #     self.counter = 0
+        # else:
+        #     self.counter += 1
 
         return response
