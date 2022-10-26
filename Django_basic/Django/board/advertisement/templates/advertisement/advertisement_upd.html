@@ -11,11 +11,14 @@
 <body>
     <h1>Предлагаем следующий перечень услуг.</h1>
     <ul>
-        <li><a href="/repair">Мастер по ремонту бытовой техники.</a></li>
-        <li><a href="/veterinary">Ветеринар.</a></li>
-        <li><a href="/plumber">Сантехник.</a></li>
-        <li><a href="/construction">Строительныйе работы.</a></li>
-        <li><a href="/excavator">Экскаватор.</a></li>
+<!--        <li><a href="/repair">Мастер по ремонту бытовой техники.</a></li>-->
+<!--        <li><a href="/veterinary">Ветеринар.</a></li>-->
+<!--        <li><a href="/plumber">Сантехник.</a></li>-->
+<!--        <li><a href="/construction">Строительныйе работы.</a></li>-->
+<!--        <li><a href="/excavator">Экскаватор.</a></li>-->
+        {% for advertisement in advertisements %}
+        <li>{{advertisement}}</li>
+        {% endfor %}
     </ul>
 </body>
 <footer>
