@@ -1,4 +1,8 @@
 from django.shortcuts import render
+from django.views import View
+from django.views.generic import TemplateView
+
+
 # from django.http import HttpResponse
 # Create your views here.
 
@@ -33,6 +37,15 @@ def advertisement_upd(request, *args, **kwargs):
     return render(request, 'advertisement/advertisement_upd.html', {'advertisements': advertisements})
 
 
+# def advertisement_upd1(request, *args, **kwargs):
+#     advertisements1 = [
+#         "Уборка дома",
+#         "Сад и ландшафтный дизайн",
+#         "Погрузочно-разгрузочные работы",
+#     ]
+#     return render(request, 'advertisement/advertisement_upd.html', {'advertisements1': advertisements1})
+
+
 def repair(request, *args, **kwargs):
     return render(request, 'advertisement/repair.html', {})
 
@@ -53,12 +66,13 @@ def excavator(request, *args, **kwargs):
     return render(request, 'advertisement/excavator.html', {})
 
 
-def contacts(request, *args, **kwargs):
-    return render(request, 'contacts/contacts.html', {})
+class Contacts(View):
+    def get(self, request):
+        return render(request, 'contacts/contacts.html', {})
 
 
-def about(request, *args, **kwargs):
-    return render(request, 'about/about.html', {})
+class About(TemplateView):
+    template_name = 'about/about.html'
 
 
 def categories(request, *args, **kwargs):
