@@ -7,11 +7,7 @@ from pprint import pprint
 
 # Файл можно открыть для чтения и прочитать в память содержимое
 
-file_name = 'byron.txt'
-file = open(file_name, mode='rb')  # mode (режим): чтение бинарное
-file_content = file.read()
-file.close()
-pprint(file_content)
+
 
 # Имя файла может быть с путем по файловой системе,
 # если путь не указан - то ищется в рабочей директории скрипта
