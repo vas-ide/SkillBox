@@ -22,35 +22,37 @@ import zipfile
 # Требования к коду: он должен быть готовым к расширению функциональности. Делать сразу на классах.
 
 # TODO здесь ваш код
-class Analize:
+class Analiz:
 
-    def __init__(self, file_name):
-        self.file_name = file_name
-        self.stat = {}
+    def __init__(self, analiz_file, analized_file):
+        self.analiz_file = analiz_file
+        self.analized_file = analized_file
+        self.analiz_time = ""
+        self.counter_in_period = 0
 
-    def unzip(self):
-        zfile = zipfile.ZipFile(self.file_name, 'r')
-        for filename in zfile.namelist():
-            zfile.extract(filename)
-        self.file_name = filename
+    def read_base(self):
+        with open(self.analiz_file, 'r', encoding='utf8') as file:
+            for line in file:
+                if len(self.analiz_time) == 0:
+                    self.analiz_time = line[0: 17]
+                if self.analiz_time == line[0: 17]:
+                    if line[29] == "N":
+                        self.counter_in_period += 1
+                if self.analiz_time != line[0: 17]:
+                    with open(self.analized_file, 'a', encoding='utf8') as code:
+                        code.write(f'{self.analiz_time}] {self.counter_in_period}\n')
+                        self.counter_in_period = 0
+                        self.analiz_time = line[0: 17]
+                        if line[29] == "N":
+                            self.counter_in_period += 1
 
-    # def collect(self):
-    #     if self.file_name.endswith('.zip'):
-    #         self.unzip()
-    #     with open(self.file_name, 'r', encoding='cp1251') as file:
-    #         for line in file:
-    #             self._collect_for_line(line=line[:-1])
-    #
-    # def _collect_for_line(self, line):
-    #     for char in line:
-    #         if self.sequence in self.stat:
-    #             if char in self.stat[self.sequence]:
-    #                 self.stat[self.sequence][char] += 1
-    #             else:
-    #                 self.stat[self.sequence][char] = 1
-    #         else:
-    #             self.stat[self.sequence] = {char: 1}
-    #         self.sequence = self.sequence[1:] + char
+
+
+
+analizing_base = Analiz("events.txt", "inf.txt")
+analizing_base.read_base()
+
+
 
 # После выполнения первого этапа нужно сделать группировку событий
 #  - по часам
