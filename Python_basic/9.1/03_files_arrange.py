@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import os, time, shutil
+import zipfile
+
 
 # Нужно написать скрипт для упорядочивания фотографий (вообще любых файлов)
 # Скрипт должен разложить файлы из одной папки по годам и месяцам в другую.
@@ -35,6 +37,39 @@ import os, time, shutil
 # Требования к коду: он должен быть готовым к расширению функциональности. Делать сразу на классах.
 
 # TODO здесь ваш код
+
+class Fotosort:
+
+    def __init__(self, file_name):
+        self.file_name = file_name
+        if file_name[-4:] == ".zip":
+            self.path = f'//home/VAS-IDE/Documents/CODE/Python/skillbox/Python_basic/9.1/{file_name[:-4]}'
+        else:
+            self.path = '//home/VAS-IDE/Documents/CODE/Python/skillbox/Python_basic/9.1/icons'
+        self.path_normalized = os.path.normpath(self.path)
+
+    def unzip(self):
+        zfile = zipfile.ZipFile(self.file_name, 'r')
+        for filename in zfile.namelist():
+            zfile.extract(filename)
+        self.file_name = filename
+
+    def wolking(self):
+        for dirpath, dirnames, filenames in os.walk(self.path_normalized):
+            # print(dirpath, dirnames, filenames)
+            for file in filenames:
+                full_file_path = dirpath + '/' + file
+                secs = os.path.getctime(full_file_path)
+                file_time = time.gmtime(secs)
+                if file_time[0] == 2022:
+                    print(full_file_path,
+                          # secs,
+                          file_time)
+        # print(f"{counter}\n{__file__}\n{os.path.dirname(__file__)}")
+
+sortfoto = Fotosort("icons.zip")
+sortfoto.unzip()
+sortfoto.wolking()
 
 # Усложненное задание (делать по желанию)
 # Нужно обрабатывать zip-файл, содержащий фотографии, без предварительного извлечения файлов в папку.
