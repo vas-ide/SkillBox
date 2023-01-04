@@ -31,7 +31,7 @@ def checkio(cmd):
             print(f"{numbers_simple[cmd_hon]} hundred")
             return f"{numbers_simple[cmd_hon]} hundred"
         case int() as command if 101 <= command <= 999:
-            cmd_hun = cmd_dec = int(str(command)[0])
+            cmd_hun = int(str(command)[0])
             cmd_upd = int(str(command)[1:])
             match cmd_upd:
                 case int() as command if 0 <= cmd_upd <= 9:
