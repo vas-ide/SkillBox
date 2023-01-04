@@ -34,7 +34,7 @@ def checkio(cmd):
             cmd_hun = int(str(command)[0])
             cmd_upd = int(str(command)[1:])
             match cmd_upd:
-                case int() as command if 0 <= cmd_upd <= 9:
+                case int() as command if 0 <= command <= 9:
                     print(f"{numbers_simple[cmd_hun]} hundred {numbers_simple[cmd_upd]}")
                     return f"{numbers_simple[cmd_hun]} hundred {numbers_simple[cmd_upd]}"
                 case int() as command if 11 <= command <= 19:
@@ -52,7 +52,23 @@ def checkio(cmd):
             print(f"Введите корректную команду")
 
 
-
+# FIRST_TEN = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+# SECOND_TEN = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
+# OTHER_TENS = ["twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
+# HUNDRED = "hundred"
+#
+# print(305 // 100)
+#
+# def checkio(number):
+#     result = []
+#     if number >= 100:
+#         result.append(FIRST_TEN[number // 100] + " hundred")
+#     if (number % 100) // 10 > 1:
+#         result.append(OTHER_TENS[((number % 100) // 10) - 2])
+#     if (number % 100) // 10 == 1:
+#         result.append(SECOND_TEN[number % 10])
+#     elif (number % 10) > 0:
+#         result.append(FIRST_TEN[number % 10])
 
 
 
