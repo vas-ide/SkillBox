@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import random
 
 # День сурка
 #
@@ -19,6 +20,33 @@
 
 ENLIGHTENMENT_CARMA_LEVEL = 777
 
-# TODO здесь ваш код
+class Carma:
+    def __init__(self):
+        self.carma = 0
 
+man = Carma()
+
+
+while man.carma < ENLIGHTENMENT_CARMA_LEVEL:
+    def one_day():
+        dice_carma = random.randint(1, 7)
+        man.carma += dice_carma
+        dice_event = random.randint(1, 13)
+        if dice_event == 13:
+            pass
+
+            # - IamGodError
+            - DrunkError
+            - CarCrashError
+            - GluttonyError
+            - DepressionError
+            - SuicideError
+        else:
+            print(f"Карма в день - {dice_carma}.   Накопленная карма - {man.carma}.")
+
+
+
+
+
+    one_day()
 # https://goo.gl/JnsDqu
