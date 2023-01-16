@@ -23,30 +23,64 @@ ENLIGHTENMENT_CARMA_LEVEL = 777
 class Carma:
     def __init__(self):
         self.carma = 0
+        self.counter = 0
+
 
 man = Carma()
 
 
+class DrunkError:
+    pass
+
+
+class IamGodError:
+    pass
+
+
+class CarCrashError:
+    pass
+
+
+class GluttonyError:
+    pass
+
+
+class DepressionError:
+    pass
+
+
+class SuicideError:
+    pass
+
+
 while man.carma < ENLIGHTENMENT_CARMA_LEVEL:
+    man.counter += 1
     def one_day():
         dice_carma = random.randint(1, 7)
         man.carma += dice_carma
         dice_event = random.randint(1, 13)
         if dice_event == 13:
             pass
-
-            # - IamGodError
-            - DrunkError
-            - CarCrashError
-            - GluttonyError
-            - DepressionError
-            - SuicideError
+            dice_error = random.randint(1, 5)
+            if dice_error == 1:
+                raise DrunkError(f"Надо меньше пить")
+                print(f"DAY --{man.counter}.  Карма в день - {dice_carma}.   Накопленная карма - {man.carma}.")
+            elif dice_error == 2:
+                raise IamGodError(f"Я бог")
+                print(f"DAY --{man.counter}.  Карма в день - {dice_carma}.   Накопленная карма - {man.carma}.")
+            elif dice_error == 3:
+                raise CarCrashError(f"Гребаный металолом")
+                print(f"DAY --{man.counter}.  Карма в день - {dice_carma}.   Накопленная карма - {man.carma}.")
+            elif dice_error == 4:
+                raise GluttonyError(f"Опять ДИАРЕЯ")
+                print(f"DAY --{man.counter}.  Карма в день - {dice_carma}.   Накопленная карма - {man.carma}.")
+            elif dice_error == 5:
+                raise DepressionError(f"DEPTRSSION")
+                print(f"DAY --{man.counter}.  Карма в день - {dice_carma}.   Накопленная карма - {man.carma}.")
+            elif dice_error == 6:
+                raise SuicideError(f"SUISIDE")
+                print(f"DAY --{man.counter}.  Карма в день - {dice_carma}.   Накопленная карма - {man.carma}.")
         else:
-            print(f"Карма в день - {dice_carma}.   Накопленная карма - {man.carma}.")
-
-
-
-
-
+            print(f"DAY --{man.counter}.  Карма в день - {dice_carma}.   Накопленная карма - {man.carma}.")
     one_day()
 # https://goo.gl/JnsDqu
