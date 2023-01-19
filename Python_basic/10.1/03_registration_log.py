@@ -57,8 +57,8 @@ class Registration_check:
                         int("В 3 аргументе массива неверная информация")
                     except ValueError as v_error:
                         with open(self.registration_bad_log, 'a', encoding='utf8') as code:
-                            code.write(f"{number_string}    Поймано исключение  {v_error} --- ValueError ==> {lst_string[2]} Это не возраст\n")
-                        print(f"{number_string}    Поймано исключение  {v_error} --- ValueError ==> {lst_string[2]} Это не возраст\n")
+                            code.write(f"{number_string}    Поймано исключение  {v_error} --- ValueError ==> {lst_string[-1]} Это не возраст\n")
+                        print(f"{number_string}    Поймано исключение  {v_error} --- ValueError ==> {lst_string[-1]} Это не возраст\n")
                 elif 100 < int(lst_string[-1]) or int(lst_string[-1]) < 10:
                     try:
                         int("Поле возраст НЕ является числом от 10 до 99")
@@ -79,7 +79,7 @@ class Registration_check:
                             if i.isdigit():
                                 raise NotNameError
                         with open(self.registration_good_log, 'a', encoding='utf8') as code:
-                            code.write(f"{number_string}    {lst_string}   \n")
+                            code.write(f"{number_string}    {line}   \n")
                         print(f"{number_string}    {line}   \n")
                     except:
                         with open(self.registration_bad_log, 'a', encoding='utf8') as code:
