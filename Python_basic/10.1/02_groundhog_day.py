@@ -30,6 +30,7 @@ man = Carma()
 
 
 class DrunkError:
+    print()
     pass
 
 
@@ -60,27 +61,34 @@ while man.carma < ENLIGHTENMENT_CARMA_LEVEL:
         man.carma += dice_carma
         dice_event = random.randint(1, 13)
         if dice_event == 13:
-            pass
-            dice_error = random.randint(1, 5)
-            if dice_error == 1:
-                raise DrunkError(f"Надо меньше пить")
-                print(f"DAY --{man.counter}.  Карма в день - {dice_carma}.   Накопленная карма - {man.carma}.")
-            elif dice_error == 2:
-                raise IamGodError(f"Я бог")
-                print(f"DAY --{man.counter}.  Карма в день - {dice_carma}.   Накопленная карма - {man.carma}.")
-            elif dice_error == 3:
-                raise CarCrashError(f"Гребаный металолом")
-                print(f"DAY --{man.counter}.  Карма в день - {dice_carma}.   Накопленная карма - {man.carma}.")
-            elif dice_error == 4:
-                raise GluttonyError(f"Опять ДИАРЕЯ")
-                print(f"DAY --{man.counter}.  Карма в день - {dice_carma}.   Накопленная карма - {man.carma}.")
-            elif dice_error == 5:
-                raise DepressionError(f"DEPTRSSION")
-                print(f"DAY --{man.counter}.  Карма в день - {dice_carma}.   Накопленная карма - {man.carma}.")
-            elif dice_error == 6:
-                raise SuicideError(f"SUISIDE")
-                print(f"DAY --{man.counter}.  Карма в день - {dice_carma}.   Накопленная карма - {man.carma}.")
+            # dice_error = random.randint(1, 6)
+            try:
+                # if dice_error == 1:
+                raise DrunkError("DRUNK")
+            except DrunkError as dr_error:
+                print(f"Поймано {dr_error}")
+
+
+
+
+
+                # elif dice_error == 2:
+                #     raise IamGodError(f"Я бог.   DAY --{man.counter}.  Карма в день - {dice_carma}.   "
+                #                       f"Накопленная карма - {man.carma}.")
+                # elif dice_error == 3:
+                #     raise CarCrashError(f"Гребаный металолом.   DAY --{man.counter}.  Карма в день - {dice_carma}.   "
+                #                         f"Накопленная карма - {man.carma}.")
+                # elif dice_error == 4:
+                #     raise GluttonyError(f"Опять ДИАРЕЯ.   DAY --{man.counter}.  Карма в день - {dice_carma}.   "
+                #                         f"Накопленная карма - {man.carma}.")
+                # elif dice_error == 5:
+                #     raise DepressionError(f"DEPTRSSION.   DAY --{man.counter}.  Карма в день - {dice_carma}.   "
+                #                           f"Накопленная карма - {man.carma}.")
+                # elif dice_error == 6:
+                #     raise SuicideError(f"SUISIDE.   DAY --{man.counter}.  Карма в день - {dice_carma}.   "
+                #                        f"Накопленная карма - {man.carma}.")
         else:
             print(f"DAY --{man.counter}.  Карма в день - {dice_carma}.   Накопленная карма - {man.carma}.")
     one_day()
+print(f"---DAY--- {man.counter}")
 # https://goo.gl/JnsDqu

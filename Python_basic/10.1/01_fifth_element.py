@@ -9,10 +9,10 @@ def multi_pass():
         leeloo = int(input_data[4])
         result = BRUCE_WILLIS * leeloo
         print(f"- Leeloo Dallas! Multi-pass № {result}!")
-    except ValueError:
-        print(f"Неправильный формат данных - необходимы цийфры")
-    except IndexError:
-        print(f"Неправильный формат данных - мало значений")
+    except ValueError as vr:
+        print(f"Неправильный формат данных - необходимы цийфры {vr}")
+    except IndexError as ir:
+        print(f"Неправильный формат данных - мало значений {ir}")
     except:
         print(f"Неустановленная ошибка")
 
