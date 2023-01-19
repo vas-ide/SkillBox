@@ -43,40 +43,48 @@ class Registration_check:
         number_string = 1
         with open(self.analiz_file, 'r', encoding='utf8') as file:
             for line in file:
+                print(line)
                 lst_string = line.split(" ")
                 if len(lst_string) != 3:
                     try:
                         int("В массиве должно быть 3 значения")
                     except ValueError as v_error:
                         with open(self.registration_bad_log, 'a', encoding='utf8') as code:
-                            code.write(f"{number_string}    Поймано исключение  {v_error} --- ValueError ==> {len(lst_string)} Аргументов в массиве")
-                        print(f"{number_string}    Поймано исключение  {v_error} --- ValueError ==> {len(lst_string)} Аргументов в массиве")
+                            code.write(f"{number_string}    Поймано исключение  {v_error} --- ValueError ==> {len(lst_string)} Аргументов в массиве\n")
+                        print(f"{number_string}    Поймано исключение  {v_error} --- ValueError ==> {len(lst_string)} Аргументов в массиве\n")
                 elif lst_string[-1][0].isalpha():
                     try:
                         int("В 3 аргументе массива неверная информация")
                     except ValueError as v_error:
                         with open(self.registration_bad_log, 'a', encoding='utf8') as code:
-                            code.write(f"{number_string}    Поймано исключение  {v_error} --- ValueError ==> {lst_string[2]} Это не возраст")
-                        print(f"{number_string}    Поймано исключение  {v_error} --- ValueError ==> {lst_string[2]} Это не возраст")
+                            code.write(f"{number_string}    Поймано исключение  {v_error} --- ValueError ==> {lst_string[2]} Это не возраст\n")
+                        print(f"{number_string}    Поймано исключение  {v_error} --- ValueError ==> {lst_string[2]} Это не возраст\n")
                 elif 100 < int(lst_string[-1]) or int(lst_string[-1]) < 10:
                     try:
                         int("Поле возраст НЕ является числом от 10 до 99")
                     except ValueError as v_error:
-                        print(f"{number_string}    Поймано исключение  {v_error} --- ValueError ==> {int(lst_string[2])} Указанный возвраст не воходит в кретерий")
+                        with open(self.registration_bad_log, 'a', encoding='utf8') as code:
+                            code.write(f"{number_string}    Поймано исключение  {v_error} --- ValueError ==> {int(lst_string[2])} Указанный возвраст не воходит в кретерий\n")
+                        print(f"{number_string}    Поймано исключение  {v_error} --- ValueError ==> {int(lst_string[2])} Указанный возвраст не воходит в кретерий\n")
                 elif "@" not in lst_string[1] or "." not in lst_string[1]:
                     try:
                         raise NotEmailError
                     except:
-                        print(f"{number_string}    Поймано исключение {NotEmailError} --- NotEmailError ==> {lst_string[1]} Поле емейл НЕ содержит @ и .(точку)")
+                        with open(self.registration_bad_log, 'a', encoding='utf8') as code:
+                            code.write(f"{number_string}    Поймано исключение {NotEmailError} --- NotEmailError ==> {lst_string[1]} Поле емейл НЕ содержит @ и .(точку)\n")
+                        print(f"{number_string}    Поймано исключение {NotEmailError} --- NotEmailError ==> {lst_string[1]} Поле емейл НЕ содержит @ и .(точку)\n")
                 elif len(lst_string[0]) > 0:
                     try:
                         for i in lst_string[0]:
                             if i.isdigit():
                                 raise NotNameError
-
-                        print(f"{number_string}    {lst_string}   ")
+                        with open(self.registration_good_log, 'a', encoding='utf8') as code:
+                            code.write(f"{number_string}    {lst_string}   \n")
+                        print(f"{number_string}    {line}   \n")
                     except:
-                        print(f"{number_string}    Поймано исключение {NotNameError} --- NotNameError ==> {lst_string[0]} Поле имени содержит НЕ только буквы")
+                        with open(self.registration_bad_log, 'a', encoding='utf8') as code:
+                            code.write(f"{number_string}    Поймано исключение {NotNameError} --- NotNameError ==> {lst_string[0]} Поле имени содержит НЕ только буквы\n")
+                        print(f"{number_string}    Поймано исключение {NotNameError} --- NotNameError ==> {lst_string[0]} Поле имени содержит НЕ только буквы\n")
                 number_string += 1
 
 
