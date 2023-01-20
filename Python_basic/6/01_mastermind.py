@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from pprint import pprint
 
 # Игра «Быки и коровы»
 # https://goo.gl/Go2mb9
