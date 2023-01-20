@@ -50,9 +50,8 @@ from termcolor import cprint, colored
 couter = 0
 generate_number = generate_number()
 print(generate_number)
-stop = True
 global input_number
-while stop == True:
+while True:
     global input_number
 
     input_number = input(colored('Введите 4-х значное число без повторения символов '
@@ -61,13 +60,34 @@ while stop == True:
         case str(number) if number == generate_number:
             couter += 1
             print(f"You win The number was {generate_number} CONGRATULATIONS !!!  You used {couter} try.")
-            stop = False
+            raise StopIteration
         case str() as number if len(number) == 4 and str(number)[0] != "0":
             check_a_generated_number(input_number=str(number), generate_number=generate_number)
             couter += 1
         case _:
             print(
                 f"Некоректный ввод необходимо ввести 4-ч значное число без повторения символов отличное от нуля !")
+
+
+
+# stop = True
+# global input_number
+# while stop == True:
+#     global input_number
+#
+#     input_number = input(colored('Введите 4-х значное число без повторения символов '
+#                                      'первая цифра исла отлична от нуля)!', color='blue'))
+#     match input_number:
+#         case str(number) if number == generate_number:
+#             couter += 1
+#             print(f"You win The number was {generate_number} CONGRATULATIONS !!!  You used {couter} try.")
+#             stop = False
+#         case str() as number if len(number) == 4 and str(number)[0] != "0":
+#             check_a_generated_number(input_number=str(number), generate_number=generate_number)
+#             couter += 1
+#         case _:
+#             print(
+#                 f"Некоректный ввод необходимо ввести 4-ч значное число без повторения символов отличное от нуля !")
 
 
 
