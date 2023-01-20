@@ -52,7 +52,14 @@ print(generate_number)
 while True:
     global input_number
     input_number = int(input(colored('Введите 4-х значное число без повторения символов '
-                                     'первая цифра числа отлична от нуля)!', color='blue')))
+                                     'первая цифра исла отлична от нуля)!', color='blue')))
+    match input_number:
+        case int() as number:
+            pass
+        case _:
+            print(f"x")
+
+
     if len(str(input_number)) == 4:
         input_number_str = str(input_number)
         value_set = set()

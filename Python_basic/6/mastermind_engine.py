@@ -5,23 +5,41 @@ from termcolor import colored
 
 def generate_number():
     generate_number_list = []
-    generate_number_set = set()
     generate_number_str = ''
     while len(generate_number_list) < 4:
         num = randint(0, 9)
-        if num < 10:
+        if len(generate_number_list) < 1 and num == 0:
+            pass
+        elif len(generate_number_list) < 1 and num != 0:
             generate_number_list.append(num)
-            generate_number_set.add(num)
             generate_number_str += str(num)
-        if int(generate_number_list[0]) == 0:
-            generate_number_list = []
-            generate_number_set = set()
-            generate_number_str = ''
-        if len(generate_number_list) > len(generate_number_set):
-            generate_number_list = []
-            generate_number_set = set()
-            generate_number_str = ''
+        elif num not in generate_number_list:
+            generate_number_list.append(num)
+            generate_number_str += str(num)
     return generate_number_str
+
+
+
+
+# def generate_number():
+#     generate_number_list = []
+#     generate_number_set = set()
+#     generate_number_str = ''
+#     while len(generate_number_list) < 4:
+#         num = randint(0, 9)
+#         if num < 10:
+#             generate_number_list.append(num)
+#             generate_number_set.add(num)
+#             generate_number_str += str(num)
+#         if int(generate_number_list[0]) == 0:
+#             generate_number_list = []
+#             generate_number_set = set()
+#             generate_number_str = ''
+#         if len(generate_number_list) > len(generate_number_set):
+#             generate_number_list = []
+#             generate_number_set = set()
+#             generate_number_str = ''
+#     return generate_number_str
 
 
 def check_a_generated_number(input_number=1234, generate_number=1234):
