@@ -52,8 +52,6 @@ generate_number = generate_number()
 print(generate_number)
 global input_number
 while True:
-    global input_number
-
     input_number = input(colored('Введите 4-х значное число без повторения символов '
                                      'первая цифра исла отлична от нуля)!', color='blue'))
     match input_number:
@@ -71,10 +69,7 @@ while True:
 
 
 # stop = True
-# global input_number
 # while stop == True:
-#     global input_number
-#
 #     input_number = input(colored('Введите 4-х значное число без повторения символов '
 #                                      'первая цифра исла отлична от нуля)!', color='blue'))
 #     match input_number:
@@ -91,45 +86,45 @@ while True:
 
 
 
-        # input_number = int(input(colored('Введите 4-х значное число без повторения символов '
-        #                                  'первая цифра исла отлична от нуля)!', color='blue')))
-        # match input_number:
-        #     case int() as number if len(str(number)) == 4 and str(number)[0] != "0":
-        #         if str(generate_number) == str(number):
-        #             print(colored(f'Число ходов - {couter} Хотите ещё партию', color='magenta'))
-        #         else:
-        #             check_a_generated_number(input_number=str(number), generate_number=generate_number)
-        #             couter += 1
-        #     case _:
-        #         print(
-        #             f"Некоректный ввод необходимо ввести 4-ч значное число без повторения символов отличное от нуля !")
+# input_number = int(input(colored('Введите 4-х значное число без повторения символов '
+#                                  'первая цифра исла отлична от нуля)!', color='blue')))
+# match input_number:
+#     case int() as number if len(str(number)) == 4 and str(number)[0] != "0":
+#         if str(generate_number) == str(number):
+#             print(colored(f'Число ходов - {couter} Хотите ещё партию', color='magenta'))
+#         else:
+#             check_a_generated_number(input_number=str(number), generate_number=generate_number)
+#             couter += 1
+#     case _:
+#         print(
+#             f"Некоректный ввод необходимо ввести 4-ч значное число без повторения символов отличное от нуля !")
 
 
-    # input_number = int(input(colored('Введите 4-х значное число без повторения символов '
-    #                                  'первая цифра числа отлична от нуля)!', color='blue')))
-    # if len(str(input_number)) == 4:
-    #     input_number_str = str(input_number)
-    #     value_set = set()
-    #     for value in input_number_str:
-    #         value_set.add(value)
-    #     if len(value_set) == 4:
-    #         check_a_generated_number(input_number=input_number_str, generate_number=generate_number)
-    #         couter += 1
-    #         if str(generate_number) == input_number_str:
-    #             print(colored(f'Число ходов - {couter} Хотите ещё партию', color='magenta'))
-    #             break
+# input_number = int(input(colored('Введите 4-х значное число без повторения символов '
+#                                  'первая цифра числа отлична от нуля)!', color='blue')))
+# if len(str(input_number)) == 4:
+#     input_number_str = str(input_number)
+#     value_set = set()
+#     for value in input_number_str:
+#         value_set.add(value)
+#     if len(value_set) == 4:
+#         check_a_generated_number(input_number=input_number_str, generate_number=generate_number)
+#         couter += 1
+#         if str(generate_number) == input_number_str:
+#             print(colored(f'Число ходов - {couter} Хотите ещё партию', color='magenta'))
+#             break
 
 
-    # elif len(str(input_number)) != 4:
-    #     input_number = int(input(colored('Некоректный ввод - "Введите 4-х значное число без повторения символов '
-    #                                      'первая цифра числа отлична от нуля)!"', color='red')))
-    #     input_number_str = str(input_number)
-    #     value_set = set()
-    #     for value in input_number_str:
-    #         value_set.add(value)
-    #     if len(value_set) == 4:
-    #         check_a_generated_number(input_number=input_number_str, generate_number=generate_number)
-    #         couter += 1
-    #         if str(generate_number) == input_number_str:
-    #             print(colored(f'Число ходов - {couter} Хотите ещё партию', color='magenta'))
-    #             break
+# elif len(str(input_number)) != 4:
+#     input_number = int(input(colored('Некоректный ввод - "Введите 4-х значное число без повторения символов '
+#                                      'первая цифра числа отлична от нуля)!"', color='red')))
+#     input_number_str = str(input_number)
+#     value_set = set()
+#     for value in input_number_str:
+#         value_set.add(value)
+#     if len(value_set) == 4:
+#         check_a_generated_number(input_number=input_number_str, generate_number=generate_number)
+#         couter += 1
+#         if str(generate_number) == input_number_str:
+#             print(colored(f'Число ходов - {couter} Хотите ещё партию', color='magenta'))
+#             break
