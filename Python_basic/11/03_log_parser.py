@@ -23,24 +23,52 @@ class Analiz:
     def __init__(self, analiz_file, analized_file):
         self.analiz_file = analiz_file
         self.analized_file = analized_file
-        self.analiz_time = ""
-        self.counter_in_period = 0
+        self.stat_dic = {}
 
     def read_base(self):
-        with open(self.analiz_file, 'r', encoding='utf8') as file:
+        with open(self.analiz_file, "r", encoding="utf8") as file:
             for line in file:
-                if len(self.analiz_time) == 0:
-                    self.analiz_time = line[0: 17]
-                if self.analiz_time == line[0: 17]:
-                    if line[29] == "N":
-                        self.counter_in_period += 1
-                if self.analiz_time != line[0: 17]:
-                    with open(self.analized_file, 'a', encoding='utf8') as code:
-                        code.write(f'{self.analiz_time}] {self.counter_in_period}\n')
-                        self.counter_in_period = 0
-                        self.analiz_time = line[0: 17]
-                        if line[29] == "N":
-                            self.counter_in_period += 1
+                if len(line) == 33 and f"{line[1:17]}" not in self.stat_dic:
+                    self.stat_dic[f"{line[1:17]}"] = 1
+                elif len(line) == 33 and f"{line[1:17]}" in self.stat_dic:
+                    self.stat_dic[f"{line[1:17]}"] += 1
+                return self.stat_dic
+
+analizing_base = Analiz("events.txt", "inf.txt")
+analizing_base.read_base()
+
+grouped_events = analizing_base.read_base()
+for group_time, event_count in grouped_events.items():
+    print(f"Time --- {group_time}   Count --- {event_count}")
+for group_time, event_count in grouped_events.items():
+    print("SECOND")
+    print(f"Time --- {group_time}   Count --- {event_count}")
+
+
+
+
+
+
+
+
+
+
+
+    # def read_base(self):
+    #     with open(self.analiz_file, 'r', encoding='utf8') as file:
+    #         for line in file:
+    #             if len(self.analiz_time) == 0:
+    #                 self.analiz_time = line[0: 17]
+    #             if self.analiz_time == line[0: 17]:
+    #                 if line[29] == "N":
+    #                     self.counter_in_period += 1
+    #             if self.analiz_time != line[0: 17]:
+    #                 with open(self.analized_file, 'a', encoding='utf8') as code:
+    #                     code.write(f'{self.analiz_time}] {self.counter_in_period}\n')
+    #                     self.counter_in_period = 0
+    #                     self.analiz_time = line[0: 17]
+    #                     if line[29] == "N":
+    #                         self.counter_in_period += 1
 
     # class Analiz:
     #
@@ -105,8 +133,8 @@ class Analiz:
     #                         self.counter_in_period += 1
 
 
-analizing_base = Analiz("events.txt", "inf.txt")
-analizing_base.read_base()
+# analizing_base = Analiz("events.txt", "inf.txt")
+# analizing_base.read_base()
 # analizing_base.read_base_hour()
 # analizing_base.read_base_day()
 
