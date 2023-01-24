@@ -14,4 +14,99 @@
 #
 # [2018-05-17 01:57] 1234
 
-# TODO здесь ваш код
+
+import zipfile
+
+
+class Analiz:
+
+    def __init__(self, analiz_file, analized_file):
+        self.analiz_file = analiz_file
+        self.analized_file = analized_file
+        self.analiz_time = ""
+        self.counter_in_period = 0
+
+    def read_base(self):
+        with open(self.analiz_file, 'r', encoding='utf8') as file:
+            for line in file:
+                if len(self.analiz_time) == 0:
+                    self.analiz_time = line[0: 17]
+                if self.analiz_time == line[0: 17]:
+                    if line[29] == "N":
+                        self.counter_in_period += 1
+                if self.analiz_time != line[0: 17]:
+                    with open(self.analized_file, 'a', encoding='utf8') as code:
+                        code.write(f'{self.analiz_time}] {self.counter_in_period}\n')
+                        self.counter_in_period = 0
+                        self.analiz_time = line[0: 17]
+                        if line[29] == "N":
+                            self.counter_in_period += 1
+
+    # class Analiz:
+    #
+    #     def __init__(self, analiz_file, analized_file):
+    #         self.analiz_file = analiz_file
+    #         self.analized_file = analized_file
+    #         self.analiz_time = ""
+    #         self.counter_in_period = 0
+    #
+    #     def read_base(self):
+    #         with open(self.analiz_file, 'r', encoding='utf8') as file:
+    #             for line in file:
+    #                 if len(self.analiz_time) == 0:
+    #                     self.analiz_time = line[0: 17]
+    #                 if self.analiz_time == line[0: 17]:
+    #                     if line[29] == "N":
+    #                         self.counter_in_period += 1
+    #                 if self.analiz_time != line[0: 17]:
+    #                     with open(self.analized_file, 'a', encoding='utf8') as code:
+    #                         code.write(f'{self.analiz_time}] {self.counter_in_period}\n')
+    #                         self.counter_in_period = 0
+    #                         self.analiz_time = line[0: 17]
+    #                         if line[29] == "N":
+    #                             self.counter_in_period += 1
+
+
+    # def read_base_hour(self):
+    #     with open(self.analized_file, 'a', encoding='utf8') as code:
+    #         code.write(f'Hour\'s\n')
+    #     print()
+    #     with open(self.analiz_file, 'r', encoding='utf8') as file:
+    #         for line in file:
+    #             if len(self.analiz_time) == 0:
+    #                 self.analiz_time = line[0: 14]
+    #             if self.analiz_time == line[0: 14]:
+    #                 if line[29] == "N":
+    #                     self.counter_in_period += 1
+    #             if self.analiz_time != line[0: 14]:
+    #                 with open(self.analized_file, 'a', encoding='utf8') as code:
+    #                     code.write(f'{self.analiz_time}] {self.counter_in_period}\n')
+    #                     self.counter_in_period = 0
+    #                     self.analiz_time = line[0: 14]
+    #                     if line[29] == "N":
+    #                         self.counter_in_period += 1
+    #
+    # def read_base_day(self):
+    #     with open(self.analized_file, 'a', encoding='utf8') as code:
+    #         code.write(f'Day\'s\n')
+    #     with open(self.analiz_file, 'r', encoding='utf8') as file:
+    #         for line in file:
+    #             if len(self.analiz_time) == 0:
+    #                 self.analiz_time = line[0: 11]
+    #             if self.analiz_time == line[0: 11]:
+    #                 if line[29] == "N":
+    #                     self.counter_in_period += 1
+    #             if self.analiz_time != line[0: 11]:
+    #                 with open(self.analized_file, 'a', encoding='utf8') as code:
+    #                     code.write(f'{self.analiz_time}] {self.counter_in_period}\n')
+    #                     self.counter_in_period = 0
+    #                     self.analiz_time = line[0: 11]
+    #                     if line[29] == "N":
+    #                         self.counter_in_period += 1
+
+
+analizing_base = Analiz("events.txt", "inf.txt")
+analizing_base.read_base()
+# analizing_base.read_base_hour()
+# analizing_base.read_base_day()
+
