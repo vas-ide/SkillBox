@@ -16,22 +16,7 @@ class PrimeNumbers:
                 yield number
 
 
-
-
-
-
-# num = PrimeNumbers(11)
-# num.__call__()
-# print(list(num.__call__()))
-
-prime_number_iterator = PrimeNumbers(n=11).get_prime_numbers()
+prime_number_iterator = PrimeNumbers(n=10000).get_prime_numbers()
 for number in prime_number_iterator:
     print(number)
-    if number == 3:
-        break
-for number in prime_number_iterator:
-    if number > 10:
-        print(number)
-
-
 
