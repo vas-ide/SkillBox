@@ -30,22 +30,14 @@ class Analiz:
             for line in file:
                 if len(line) == 33 and f"{line[1:17]}" not in self.stat_dic:
                     self.stat_dic[f"{line[1:17]}"] = 1
+                    yield self.stat_dic
                 elif len(line) == 33 and f"{line[1:17]}" in self.stat_dic:
                     self.stat_dic[f"{line[1:17]}"] += 1
-                return self.stat_dic
-
-analizing_base = Analiz("events.txt", "inf.txt")
-analizing_base.read_base()
-
-grouped_events = analizing_base.read_base()
-for group_time, event_count in grouped_events.items():
-    print(f"Time --- {group_time}   Count --- {event_count}")
-for group_time, event_count in grouped_events.items():
-    print("SECOND")
-    print(f"Time --- {group_time}   Count --- {event_count}")
 
 
-
+analizing_base = Analiz("events.txt", "inf.txt").read_base()
+for i in analizing_base:
+    print(i)
 
 
 

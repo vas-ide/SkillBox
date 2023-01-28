@@ -21,30 +21,43 @@ def get_prime_numbers(n):
 # Распечатать все простые числа до 10000 в столбик
 
 
-class PrimeNumbers:
-    pass
-    # TODO здесь ваш код
-
-
-prime_number_iterator = PrimeNumbers(n=10000)
-for number in prime_number_iterator:
-    print(number)
-
+# class PrimeNumbers:
+#
+#     def __init__(self, n):
+#         self.n = n
+#         self.prime_numbers = []
+#
+#     def get_prime_numbers(self):
+#         for number in range(2, self.n + 1):
+#             for prime in self.prime_numbers:
+#                 if number % prime == 0:
+#                     break
+#             else:
+#                 self.prime_numbers.append(number)
+#                 yield number
+#
+#
+# prime_number_iterator = PrimeNumbers(n=10000).get_prime_numbers()
+# for number in prime_number_iterator:
+#     print(number)
 
 # TODO после подтверждения части 1 преподователем, можно делать
 # Часть 2
 # Теперь нужно создать генератор, который выдает последовательность простых чисел до n
 # Распечатать все простые числа до 10000 в столбик
 
-
-def prime_numbers_generator(n):
-    pass
-    # TODO здесь ваш код
-
-
-for number in prime_numbers_generator(n=10000):
-    print(number)
-
+# def prime_numbers_generator(n):
+#     prime_numbers = []
+#     for number in range(2, n + 1):
+#         for prime in prime_numbers:
+#             if number % prime == 0:
+#                 break
+#         else:
+#             prime_numbers.append(number)
+#             yield number
+#
+# for number in prime_numbers_generator(n=10000):
+#     print(number)
 
 # Часть 3
 # Написать несколько функций-фильтров, которые выдает True, если число:
@@ -61,3 +74,21 @@ for number in prime_numbers_generator(n=10000):
 # простых счастливых палиндромных чисел и так далее. Придумать не менее 2х способов.
 #
 # Подсказка: возможно, нужно будет добавить параметр в итератор/генератор.
+
+
+def prime_numbers_generator(n):
+    prime_numbers = []
+    for number in range(2, n + 1):
+        for prime in prime_numbers:
+            if number % prime == 0:
+                break
+        else:
+            if len(str(number)) >= 3 and str(number) == str(number)[::-1] or len(str(number)) >= 3 and int(str(number)[0]) == int(str(number)[-1]):
+                prime_numbers.append(number)
+                yield number, True
+            else:
+                prime_numbers.append(number)
+                yield number
+
+for number in prime_numbers_generator(n=10000):
+    print(number)
