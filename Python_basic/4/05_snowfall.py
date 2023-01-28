@@ -11,6 +11,7 @@ sd.resolution = (1200, 600)
 N = 20
 
 # Пригодятся функции
+
 # sd.get_point()
 # sd.snowflake()
 # sd.sleep()

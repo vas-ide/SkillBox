@@ -26,7 +26,7 @@ def need_color():
     color_list_initional = ['red', 'orange', 'yellow', 'green', 'cyan', 'blue', 'purple']
     print('Возможные цвета:')
     for num, _ in enumerate(color_list_initional):
-        print(num, ':', _)
+        print(num, ':', _)cd
     for __ in range(1000):
         number = int(input('ВВедите желаемый цвет > '))
         if 0 < number > 6:
