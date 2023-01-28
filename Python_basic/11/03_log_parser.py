@@ -24,20 +24,27 @@ class Analiz:
         self.analiz_file = analiz_file
         self.analized_file = analized_file
         self.stat_dic = {}
+        self.all_stat = ""
 
     def read_base(self):
         with open(self.analiz_file, "r", encoding="utf8") as file:
             for line in file:
-                if len(line) == 33 and f"{line[1:17]}" not in self.stat_dic:
+                if len(line) == 33 and f"{line[1:17]}" not in self.stat_dic and len(self.stat_dic) < 1:
                     self.stat_dic[f"{line[1:17]}"] = 1
-                    yield self.stat_dic
+                    self.all_stat = f"{line[1:17]} = {self.stat_dic[line[1:17]]} NOK-Occasion"
+                elif len(line) == 33 and f"{line[1:17]}" not in self.stat_dic:
+                    yield self.all_stat
+                    self.stat_dic[f"{line[1:17]}"] = 1
+                    self.all_stat = f"{line[1:17]} = {self.stat_dic[line[1:17]]} NOK-Occasion"
                 elif len(line) == 33 and f"{line[1:17]}" in self.stat_dic:
                     self.stat_dic[f"{line[1:17]}"] += 1
+                    self.all_stat = f"{line[1:17]} = {self.stat_dic[line[1:17]]} NOK-Occasion"
+
 
 
 analizing_base = Analiz("events.txt", "inf.txt").read_base()
 for i in analizing_base:
-    print(i)
+    print(f"{i}")
 
 
 
