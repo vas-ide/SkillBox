@@ -4,6 +4,8 @@ def calculator(log: str) -> str:
         case str(information) if len(information) < 1:
             print(f"0")
             return f"0"
+
+
         case str(infirmation):
             class CalcInit:
                 def __init__(self, inf):
@@ -42,13 +44,13 @@ def calculator(log: str) -> str:
 
                 def calculation(self):
                     if len(self.inf_upd) == 1:
-                        self.result = self.inf_upd[0]
+                        self.result = str(self.inf_upd[0])
                     else:
                         self.result = self.inf_upd[0]
                         for _, __ in enumerate(self.inf_upd):
-                            if __ == "+":
+                            if __ == "+" and self.inf[-1] in self.symbol_lst:
                                 self.result += self.inf_upd[_ + 1]
-                            elif __ == "-":
+                            elif __ == "-" and self.inf[-1] in self.symbol_lst:
                                 self.result -= self.inf_upd[_ + 1]
                             elif __ == "=":
                                 self.result = self.inf_upd[_ + 1]
