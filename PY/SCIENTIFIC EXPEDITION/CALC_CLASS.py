@@ -1,8 +1,13 @@
 
+
+
+
+
+
 def calculator(log: str) -> str:
     match log:
         case str(information) if len(information) < 1:
-            print(f"0")
+            print(f"str - 0")
             return f"0"
         case str(infirmation):
             class CalcInit:
@@ -34,8 +39,6 @@ def calculator(log: str) -> str:
                                 self.inf_upd.append(__)
                                 self.more_arg = ""
                     self.inf_upd.append(int(self.more_arg))
-                    if __ in self.symbol_lst and _ != len(self.inf) - 1:
-                        self.inf_upd.append(__)
 
 
 
@@ -51,18 +54,27 @@ def calculator(log: str) -> str:
                             elif __ == "-":
                                 self.result -= self.inf_upd[_ + 1]
                             elif __ == "=":
-                                self.result = self.inf_upd[_ + 1]
+                                if __ == self.inf_upd[1]:
+                                    self.first_arg = self.inf_upd[0]
+                                    self.result += self.first_arg
+                                else:
+                                    pass
 
             cac = CalcInit(infirmation)
             cac.analize()
-            print((f"{cac.inf_upd}"))
+            # print((f"{cac.inf_upd}"))
             cac.calculation()
-            print(f"{str(cac.result)}")
+            print(f"str - {str(cac.result)}")
             return str(cac.result)
 
 
         case _:
             print(f"Непредвиденная ошбка нуэен дополнительный анализ.")
+calculator("5+5")
+calculator("10-5")
+calculator(" -1 + - 2")
+
+
 
 #
 calculator("000000")
@@ -73,6 +85,8 @@ calculator("12")
 # # "12"
 calculator("+12")
 # # "12"
+calculator("-12")
+# # "-12"
 calculator("")
 # # "0"
 calculator("1+2")
