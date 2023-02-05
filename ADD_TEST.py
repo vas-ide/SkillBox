@@ -1,8 +1,16 @@
 
 
 
-print(abs(float("-10")))
 
-print(abs(float("-.10")))
 
-print(float("++1+.2-"))
+
+
+import re
+
+
+test_str = ("0000000000001")
+new_lst = re.split("\+|-|=", test_str)
+
+print(new_lst)
+
+
