@@ -5,6 +5,7 @@ def calculator(log: str) -> str:
             print(f"0")
             return f"0"
 
+
         case str(infirmation):
             class CalcInit:
                 def __init__(self, inf):
@@ -29,8 +30,8 @@ def calculator(log: str) -> str:
                             elif __ in self.symbol_lst and len(self.more_arg) < 1:
                                 if __ == "-":
                                     self.more_arg += __
-                                else:
-                                    pass
+                                # else:
+                                #     pass
                             elif __ not in self.symbol_lst:
                                 self.more_arg += __
                             elif __ in self.symbol_lst and _ == len(self.inf) - 1:
@@ -80,8 +81,6 @@ def calculator(log: str) -> str:
         case _:
             print(f"Непредвиденная ошбка нуэен дополнительный анализ.")
 
-
-calculator("+")
 #
 calculator("000000")
 # # "0"
