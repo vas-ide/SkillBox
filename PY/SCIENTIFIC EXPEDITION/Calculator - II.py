@@ -11,6 +11,8 @@ def calculator(log: str) -> str:
                 def __init__(self, inf):
                     self.inf = inf
                     self.inf_init = []
+                    self.inf_init_upd = []
+                    self.inf_construct = []
                     self.inf_upd = []
                     self.result = 0
                     self.more_arg = ""
@@ -28,10 +30,37 @@ def calculator(log: str) -> str:
                             self.inf_init.append(int(self.more_arg))
                             self.more_arg = ""
                             self.inf_init.append(__)
-
-                def init_lst_inf(self):
+                    if len(self.more_arg) >= 1:
+                        self.inf_init.append(int(self.more_arg))
+                        self.more_arg = ""
                     for _, __ in enumerate(self.inf_init):
-                        pass
+                        if len(self.inf_init_upd) < 1:
+                            if __ == "-":
+                                self.more_arg = "-"
+                            elif __ == "=" or __ == "+" and self.more_arg == "-":
+                                self.more_arg = ""
+                            elif __ not in self.symbol_lst:
+                                self.more_arg += str(__)
+                                self.inf_init_upd.append(int(self.more_arg))
+                                self.more_arg = ""
+                        else:
+                            if __ not in self.symbol_lst:
+                                self.inf_init_upd.append(self.more_arg)
+                                self.more_arg = ""
+                                self.inf_init_upd.append(__)
+                            elif __ == "-" or "+":
+                                self.more_arg = __
+                            elif __ == "=" and self.more_arg == "-" or "+" or "=":
+                                self.inf_init_upd.append(self.more_arg)
+                                self.more_arg = ""
+
+
+
+
+
+                def init_inf_init_construct(self):
+                    pass
+
 
 
 
@@ -92,6 +121,7 @@ def calculator(log: str) -> str:
             cac = CalcInit(infirmation)
             cac.init_analiz()
             print(cac.inf_init)
+            print(cac.inf_init_upd)
             # cac.analize()
             # print((f"{cac.inf_upd}"))
             # cac.calculation()
