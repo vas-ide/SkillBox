@@ -33,11 +33,13 @@ def calculator(log: str) -> str:
                     if len(self.more_arg) >= 1:
                         self.inf_init.append(int(self.more_arg))
                         self.more_arg = ""
+
+                def addition_analiz(self):
                     for _, __ in enumerate(self.inf_init):
                         if len(self.inf_init_upd) < 1:
-                            if __ == "-":
+                            if __ == self.symbol_lst[1]:
                                 self.more_arg = "-"
-                            elif __ == "=" or __ == "+" and self.more_arg == "-":
+                            elif __ == self.symbol_lst[2] or __ == self.symbol_lst[0] and self.more_arg == self.symbol_lst[1]:
                                 self.more_arg = ""
                             elif __ not in self.symbol_lst:
                                 self.more_arg += str(__)
@@ -48,21 +50,15 @@ def calculator(log: str) -> str:
                                 self.inf_init_upd.append(self.more_arg)
                                 self.more_arg = ""
                                 self.inf_init_upd.append(__)
-                            elif __ == "-" or "+":
+                            elif __ == self.symbol_lst[0] or self.symbol_lst[1]:
                                 self.more_arg = __
-                            elif __ == "=" and len(self.more_arg) < 1:
-                                self.inf_init_upd.append(__)
-                            elif __ == "=" and self.more_arg == "-" or "+" or "=":
-                                self.inf_init_upd.append(self.more_arg)
-                                self.inf_init_upd.append(__)
-                                self.more_arg = ""
-                    # self.inf_init_upd.append(self.more_arg)
-
-
-
-
-
-
+                            elif __ == self.symbol_lst[2]:
+                                if self.more_arg in self.symbol_lst:
+                                    self.inf_init_upd.append(self.more_arg)
+                                    self.more_arg = ""
+                                    self.inf_init_upd.append(__)
+                                else:
+                                    self.inf_init_upd.append(__)
 
 
                 def init_inf_init_construct(self):
@@ -127,6 +123,7 @@ def calculator(log: str) -> str:
                                 self.result = self.inf_upd[_ + 1]
             cac = CalcInit(infirmation)
             cac.init_analiz()
+            cac.addition_analiz()
             print(cac.inf_init)
             print(cac.inf_init_upd)
             # cac.analize()
@@ -138,7 +135,7 @@ def calculator(log: str) -> str:
 
         case _:
             print(f"Непредвиденная ошбка нуэен дополнительный анализ.")
-
+calculator("3===+====")
 calculator("3+=")
 # "6"
 calculator("3+2==")
