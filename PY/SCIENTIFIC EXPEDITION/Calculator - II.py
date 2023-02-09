@@ -50,9 +50,16 @@ def calculator(log: str) -> str:
                                 self.inf_init_upd.append(__)
                             elif __ == "-" or "+":
                                 self.more_arg = __
+                            elif __ == "=" and len(self.more_arg) < 1:
+                                self.inf_init_upd.append(__)
                             elif __ == "=" and self.more_arg == "-" or "+" or "=":
                                 self.inf_init_upd.append(self.more_arg)
+                                self.inf_init_upd.append(__)
                                 self.more_arg = ""
+                    # self.inf_init_upd.append(self.more_arg)
+
+
+
 
 
 
@@ -131,20 +138,20 @@ def calculator(log: str) -> str:
 
         case _:
             print(f"Непредвиденная ошбка нуэен дополнительный анализ.")
-calculator("1235=8978+2135-46548")
+
 calculator("3+=")
 # "6"
-# calculator("3+2==")
+calculator("3+2==")
 # "7"
 calculator("3+-2=")
 # "1"
 calculator("-=-+3-++--+-2=-")
 # "1"
-calculator("000000")
-"0"
-calculator("0000123")
-"123"
-calculator("12")
+# calculator("000000")
+# "0"
+# calculator("0000123")
+# "123"
+# calculator("12")
 # "12"
 # calculator("+12")
 # "12"
@@ -158,9 +165,9 @@ calculator("12")
 # "3"
 # calculator("1+2-")
 # "3"
-calculator("1+2=2")
+# calculator("1+2=2")
 # "2"
-calculator("=5=10=15")
+# calculator("=5=10=15")
 # "15"
 
 
