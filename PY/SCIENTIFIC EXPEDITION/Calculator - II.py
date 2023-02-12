@@ -13,9 +13,10 @@ def calculator(log: str) -> str:
                     self.inf_init = []
                     self.inf_init_upd = []
                     self.inf_construct = []
-                    self.inf_upd = []
+                    # self.inf_upd = []
                     self.result = 0
                     self.more_arg = ""
+                    self.more_arg_add = ""
                     self.first_arg = 0
                     self.second_arg = 0
                     self.symbol_lst = ["+", "-", "="]
@@ -67,8 +68,30 @@ def calculator(log: str) -> str:
                                     elif self.inf_init_upd[-1] == self.symbol_lst[2]:
                                         self.inf_init_upd.append(__)
 
+                def construct(self):
+                    for _, __ in enumerate(self.inf_init_upd):
+                        if __ not in self.symbol_lst:
+                            self.inf_construct.append(__)
+                            self.more_arg = __
+                        else:
+                            if _ == len(self.inf_init_upd) - 1 and self.inf_construct[-1] not in self.symbol_lst:
+                                self.inf_construct.append(__)
+                            # elif _ == len(self.inf_init_upd) - 1 and self.inf_construct[-1] in self.symbol_lst:
+                            #     self.inf_construct.append(self.more_arg)
+                            # elif __ == self.symbol_lst[2] and self.inf_init_upd[_ - 1] in self.symbol_lst:
+                            #     self.inf_construct.append(self.more_arg)
 
-                # def init_inf_init_construct(self):
+
+
+
+
+
+
+
+
+
+
+
 
                 def calculation(self):
                     if len(self.inf_upd) == 1:
@@ -124,11 +147,11 @@ def calculator(log: str) -> str:
             cac.addition_analiz()
             # print(cac.inf_init)
             print(cac.inf_init_upd)
-            # cac.analize()
-            # print((f"{cac.inf_upd}"))
+            cac.construct()
+            print(cac.inf_construct)
             # cac.calculation()
             # print(f"{str(cac.result)}")
-            # return str(cac.result)
+            return str(cac.result)
 
 
         case _:
