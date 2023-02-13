@@ -62,14 +62,14 @@ def calculator(log: str) -> str:
                                 elif __ != self.symbol_lst[2]:
                                     self.more_arg = __
                                 elif __ == self.symbol_lst[2]:
-                                    if self.inf_init[_ - 1] not in self.symbol_lst \
+                                    if self.inf_init_upd[-1] == self.symbol_lst[2]:
+                                        self.inf_init_upd.append(__)
+                                    elif self.inf_init[_ - 1] not in self.symbol_lst \
                                             and self.inf_init[_ + 1] not in self.symbol_lst:
                                         self.inf_init_upd.append(__)
                                     elif self.more_arg == self.symbol_lst[0] or self.more_arg == self.symbol_lst[1]:
                                         self.inf_init_upd.append(self.more_arg)
                                         self.more_arg = ""
-                                        self.inf_init_upd.append(__)
-                                    elif self.inf_init_upd[-1] == self.symbol_lst[2]:
                                         self.inf_init_upd.append(__)
 
                 # def construct(self):
@@ -96,17 +96,24 @@ def calculator(log: str) -> str:
                     else:
                         self.result = self.inf_init_upd[0]
                         for _, __ in enumerate(self.inf_init_upd):
-                            if __ == self.symbol_lst[2] and self.inf_init_upd[_ - 1] not in self.symbol_lst \
-                                    and _ != len(self.inf_init_upd) - 1:
-                                self.result = self.inf_init_upd[_ + 1]
+                            if __ == self.symbol_lst[2]:
+                                if self.inf_init_upd[_ - 1] not in self.symbol_lst and _ != len(self.inf_init_upd) - 1:
+                                    self.result = self.inf_init_upd[_ + 1]
+                                elif self.inf_init_upd[_ - 1] in self.symbol_lst:
+                                    if self.more_arg == self.symbol_lst[0]:
+                                        self.result += self.inf_init_upd[_ + 1]
+                                    else:
+                                        self.result -= self.inf_init_upd[_ + 1]
                             elif __ == self.symbol_lst[0] or __ == self.symbol_lst[1]:
                                 self.more_arg = __
                                 if self.inf_init_upd[_ - 1] not in self.symbol_lst and _ != len(self.inf_init_upd) - 1 \
                                         and len(self.inf_init_upd) >= _ + 3:
                                     if self.more_arg == self.symbol_lst[0]:
                                         self.result += self.inf_init_upd[_ + 1]
+                                        self.first_arg = self.inf_init_upd[_ + 1]
                                     else:
                                         self.result -= self.inf_init_upd[_ + 1]
+                                        self.first_arg = self.inf_init_upd[_ + 1]
                                 elif self.inf_init_upd[_ - 1] not in self.symbol_lst and _ != len(self.inf_init_upd) - 1\
                                         and len(self.inf_init_upd) >= _ + 2:
                                     if self.more_arg == self.symbol_lst[0]:
@@ -154,14 +161,15 @@ def calculator(log: str) -> str:
 
         case _:
             print(f"Непредвиденная ошбка нуэен дополнительный анализ.")
-# calculator("3===+====")
+calculator("3===+5====")
+calculator("3===+====")
 # calculator("3+=")
 # "6"
-# calculator("3+2==")
+calculator("3+2==")
 # "7"
-# calculator("3+-2=")
+calculator("3+-2=")
 # "1"
-# calculator("-=-+3-++--+-2=-")
+calculator("-=-+3-++--+-2=-")
 # "1"
 calculator("000000")
 # "0"
