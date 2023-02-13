@@ -48,8 +48,9 @@ def calculator(log: str) -> str:
                                 self.more_arg = ""
                         else:
                             if __ not in self.symbol_lst:
-                                self.inf_init_upd.append(self.more_arg)
-                                self.more_arg = ""
+                                if self.more_arg != "":
+                                    self.inf_init_upd.append(self.more_arg)
+                                    self.more_arg = ""
                                 self.inf_init_upd.append(__)
                             else:
                                 if _ == len(self.inf_init) - 1 and __ in self.symbol_lst:
@@ -61,9 +62,9 @@ def calculator(log: str) -> str:
                                 elif __ != self.symbol_lst[2]:
                                     self.more_arg = __
                                 elif __ == self.symbol_lst[2]:
-                                    if self.inf_init[_ - 1] not in self.symbol_lst and self.inf_init[_ + 1] not in self.symbol_lst:
+                                    if self.inf_init[_ - 1] not in self.symbol_lst \
+                                            and self.inf_init[_ + 1] not in self.symbol_lst:
                                         self.inf_init_upd.append(__)
-
                                     elif self.more_arg == self.symbol_lst[0] or self.more_arg == self.symbol_lst[1]:
                                         self.inf_init_upd.append(self.more_arg)
                                         self.more_arg = ""
