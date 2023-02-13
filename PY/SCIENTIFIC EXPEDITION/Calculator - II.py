@@ -99,6 +99,19 @@ def calculator(log: str) -> str:
                             if __ == self.symbol_lst[2] and self.inf_init_upd[_ - 1] not in self.symbol_lst \
                                     and _ != len(self.inf_init_upd) - 1:
                                 self.result = self.inf_init_upd[_ + 1]
+                            elif __ == self.symbol_lst[0] or __ == self.symbol_lst[1]:
+                                self.more_arg = __
+                                if self.inf_init_upd[_ - 1] not in self.symbol_lst and _ != len(self.inf_init_upd) - 1 \
+                                        and len(self.inf_init_upd) >= _ + 3:
+                                    if self.more_arg == self.symbol_lst[0]:
+                                        self.result += self.inf_init_upd[_ + 1]
+                                    else:
+                                        self.result -= self.inf_init_upd[_ + 1]
+                                elif self.inf_init_upd[_ - 1] not in self.symbol_lst and _ != len(self.inf_init_upd) - 1\
+                                        and len(self.inf_init_upd) >= _ + 2:
+                                    if self.more_arg == self.symbol_lst[0]:
+                                        self.result = self.inf_init_upd[_ + 1]
+
 
 
 
@@ -141,14 +154,14 @@ def calculator(log: str) -> str:
 
         case _:
             print(f"Непредвиденная ошбка нуэен дополнительный анализ.")
-calculator("3===+====")
-calculator("3+=")
+# calculator("3===+====")
+# calculator("3+=")
 # "6"
-calculator("3+2==")
+# calculator("3+2==")
 # "7"
-calculator("3+-2=")
+# calculator("3+-2=")
 # "1"
-calculator("-=-+3-++--+-2=-")
+# calculator("-=-+3-++--+-2=-")
 # "1"
 calculator("000000")
 # "0"
