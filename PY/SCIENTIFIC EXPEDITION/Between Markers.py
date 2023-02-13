@@ -4,12 +4,23 @@
 
 
 def between_markers(text: str, begin: str, end: str) -> str:
-    string_init = text.split(f"{begin}")
-    print(string_init)
+    # string_init = text.split(f"{begin}")
+    if begin in text and end not in text:
+        string_init = text.split(f"{begin}")
+        print(f"{string_init[1].strip()}")
+    elif begin not in text and end in text:
+        string_init = text.split(f"{end}")
+        print(f"{string_init[0].strip()}")
+
+
+
+    # if len(string_init) < 2:
+    #     return ""
+    # print(string_init)
     # if end not in string_init[0] and end not in string_init[-1]:
     #     print(f"")
     #     return f""
-    string_init_upd = string_init[-1].split(f"{end}")
+    # string_init_upd = string_init[-1].split(f"{end}")
     # print(string_init[-1])
     # print(string_init_upd)
     # if end in string_init[0]:
