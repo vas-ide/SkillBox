@@ -6,12 +6,14 @@
 def long_pressed(text: str, typed: str) -> bool:
     match text, typed:
         case str(text) as inf_innit, str(typed) as inf_mod:
-            pass
+            if inf_innit == inf_mod:
+                print(f"{False}")
+                return False
+            else:
+                pass
+
         case _:
             print(f"Неправильный  формат данных !")
-
-
-
 
 
 
