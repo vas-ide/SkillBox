@@ -1,67 +1,50 @@
 
-
-
-
 import random
-import time
 from collections import defaultdict
-from threading import Thread
+
+import threading
 
 FISH = (None, 'плотва', 'окунь', 'лещ')
 
 
 
 
+class Fisher(threading.Thread):
 
-class Fisher(Thread):
-
-    def __init__(self, name, worms, *args, **kwargs):
+    def __init__(self, name, worms, fish_tank, lock, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.name = name
         self.worms = worms
-        self.catch = defaultdict(int)
+        self.catched = 0
+        self.fish_tank = fish_tank
+        self.fish_tank_lock = lock
 
     def run(self):
-        self.catch = defaultdict(int)
         for worm in range(self.worms):
-            _ = worm ** 10000  # фиксируем время ожидания поклевки
-            time.sleep(0.001)
             fish = random.choice(FISH)
             if fish is not None:
-                self.catch[fish] += 1
+                self.fish_tank_lock.acquire()
+                self.fish_tank[fish] += 1
+                self.fish_tank_lock.release()
+                # with self.fish_tank_lock:
+                #     self.fish_tank[fish] += 1
+                self.catched += 1
 
 
-def time_track(func):
-    def surrogate(*args, **kwargs):
-        started_at = time.time()
-
-        result = func(*args, **kwargs)
-
-        ended_at = time.time()
-        elapsed = round(ended_at - started_at, 6)
-        print(f'Функция {func.__name__} работала {elapsed} секунд(ы)',)
-        return result
-    return surrogate
-
-
-@time_track
-def run_in_one_thread(fishers):
-    for fisher in fishers:
-        fisher.run()
-
-
-@time_track
-def run_in_threads(fishers):
-    for fisher in fishers:
-        fisher.start()
-    for fisher in fishers:
-        fisher.join()
-
+# Общий сачок для рыбы
+global_fish_tank = defaultdict(int)
 
 humans = ['Васек', 'Колян', 'Петрович', 'Хмурый', 'Клава', ]
-fishers = [Fisher(name=name, worms=100) for name in humans]
+lock = threading.Lock()
+fishers = [Fisher(name=name, worms=100000, fish_tank=global_fish_tank, lock=lock) for name in humans]
+print(fishers)
 
-run_in_one_thread(fishers)
-run_in_threads(fishers)
+for fisher in fishers:
+    fisher.start()
+for fisher in fishers:
+    fisher.join()
 
+total_fish_from_fishers = sum(fisher.catched for fisher in fishers)
+total_fish_in_tank = sum(global_fish_tank.values())
 
+print(f'Итого рыбаки поймали {total_fish_from_fishers} шт., а с берега увидели {total_fish_in_tank} шт.')
