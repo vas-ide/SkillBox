@@ -15,6 +15,7 @@ class TradersAnaliz(Thread):
         self.tiker_calc = tiker_calc
         self.data_dict = data_dict
         self.data_dict_lock = lock
+        self.local_data_dict = defaultdict(list)
 
     def run(self):
 
@@ -27,9 +28,12 @@ class TradersAnaliz(Thread):
                         self.data_dict_lock.acquire()
                         self.data_dict[line[0]].append(line[2])
                         self.data_dict_lock.release()
+                        self.local_data_dict[line[0]].append(line[2])
+
 
 global_tiker_calc = []
 global_data_dict = defaultdict(list)
+
 THREADS_CALC = ["calc_1", "calc_2", "calc_3", "calc_4", "calc_5"]
 # THREADS_CALC = ["calc_1", "calc_2", "calc_3", "calc_4", "calc_5", "calc_6", "calc_7", "calc_8", "calc_9", "calc_10",
 #                 "calc_11"]
@@ -44,7 +48,8 @@ for work_calc in work_calc_lst:
 for work_calc in work_calc_lst:
     work_calc.join()
 
-# print(global_data_dict)
+global_local_dict_calc = {}
+global_data_dict_calc = [global_local_dict_calc.update(work_calc.local_data_dict) for work_calc in work_calc_lst]
 
 
 class Display():
@@ -95,5 +100,6 @@ class Display():
         self.lst_zero = sorted(self.lst_zero)
 
 
-disp = Display(analiz_data=global_data_dict)
+# disp = Display(analiz_data=global_data_dict)
+disp = Display(analiz_data=global_local_dict_calc)
 disp.run()
