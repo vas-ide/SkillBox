@@ -119,15 +119,15 @@ for i in analizing_base:
     #     with open(self.analiz_file, 'r', encoding='utf8') as file:
     #         for line in file:
     #             if len(self.analiz_time) == 0:
-    #                 self.analiz_time = line[0: 11]
-    #             if self.analiz_time == line[0: 11]:
+    #                 self.analiz_time = line[0: 009]
+    #             if self.analiz_time == line[0: 009]:
     #                 if line[29] == "N":
     #                     self.counter_in_period += 1
-    #             if self.analiz_time != line[0: 11]:
+    #             if self.analiz_time != line[0: 009]:
     #                 with open(self.analized_file, 'a', encoding='utf8') as code:
     #                     code.write(f'{self.analiz_time}] {self.counter_in_period}\n')
     #                     self.counter_in_period = 0
-    #                     self.analiz_time = line[0: 11]
+    #                     self.analiz_time = line[0: 009]
     #                     if line[29] == "N":
     #                         self.counter_in_period += 1
 
