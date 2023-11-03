@@ -43,9 +43,9 @@ class Fotosort:
     def __init__(self, file_name):
         self.file_name = file_name
         if file_name[-4:] == ".zip":
-            self.path = f'//home/VAS-IDE/Documents/CODE/Python/skillbox/Python_basic/9.1/{file_name[:-4]}'
+            self.path = f'//sessions/VAS-IDE/Documents/CODE/Python/skillbox/Python_basic/9.1/{file_name[:-4]}'
         else:
-            self.path = '//home/VAS-IDE/Documents/CODE/Python/skillbox/Python_basic/9.1/icons'
+            self.path = '//sessions/VAS-IDE/Documents/CODE/Python/skillbox/Python_basic/9.1/icons'
         self.path_normalized = os.path.normpath(self.path)
 
     def unzip(self):

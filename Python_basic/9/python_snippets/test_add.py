@@ -22,7 +22,7 @@ with InOutBlock() as in_out:
     in_out.some_method()
 
 
-path = '//home/VAS-IDE/Documents'
+path = '//sessions/VAS-IDE/Documents'
 path_normalized = os.path.normpath(path)
 counter = 0
 # Пройтись по всем файлам в директории.
