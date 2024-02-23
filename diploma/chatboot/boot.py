@@ -17,14 +17,15 @@ class Bot:
     def run(self):
         for event in self.long_poller.listen():
             print(f"полученно событие")
-            # print(event)
             try:
                 self.on_event(event)
             except Exception as err:
                 print(err)
         pass
     def on_event(self, event):
-        print(event)
+        print(event.type,event.object)
+        if event.type == VkBotEventType.MESSAGE_NEW:
+            print(f"{event.object.message["text"]}")
 
 
 
