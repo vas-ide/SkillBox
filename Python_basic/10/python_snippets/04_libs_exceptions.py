@@ -34,7 +34,7 @@ def load_image(name, colorkey=None):
     """
     fullname = os.path.join(theme.PICTURES_PATH, name)
     try:
-        image = pygame.image.load(fullname)
+        image = pygame.img_writing.load(fullname)
     except pygame.error as exc:
         print("Cannot load image:", fullname)
         raise SystemExit(exc)
