@@ -18,8 +18,8 @@ font = ImageFont.truetype(font_path, size=20)
 draw.text((200, 125), "Clear to pass (Castom house)", font=font, fill=(255,0,0))
 
 # im_upd.save("test/plane_ticket_hw.png")
-im_upd.save("castom_house.png")
-
+# im_upd.save("castom_house.png")
+# im_upd.show()
 
 
 
