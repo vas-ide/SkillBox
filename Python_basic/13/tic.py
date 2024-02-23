@@ -9,8 +9,8 @@ from ticket_upd import TicketInfoAdd
 # Пример заполнения lesson_013/images/ticket_sample.png
 # Подходящий шрифт искать на сайте ofont.ru
 
-def make_ticket(fio="Unknown", from_="USSR", to="Russia", date="1991"):
-    ticket = TicketInfoAdd(date=date, first_name=fio, departure=from_, destination=to)
+def make_ticket(fio="Gagarin", name="Yuriy",last_name="Alexeevish", from_="USSR", to="Sky", date="12.04.1961"):
+    ticket = TicketInfoAdd(date=date, first_name=fio, departure=from_, destination=to, last_name=last_name,name=name)
     ticket.run()
 
 
