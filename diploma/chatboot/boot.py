@@ -13,6 +13,7 @@ class Bot:
         self.vk = vk_api.VkApi(token=token)
         self.long_poller = vk_api.bot_longpoll.VkBotLongPoll(vk=self.vk, group_id=self.community_id)
 
+
     def run(self):
         for event in self.long_poller.listen():
             print(f"полученно событие")
