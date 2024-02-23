@@ -25,7 +25,7 @@ class Bot:
     def on_event(self, event):
         print(event.type,event.object)
         if event.type == VkBotEventType.MESSAGE_NEW:
-            print(f"{event.object.message["text"]}")
+            print( f"{event.object.message["text"]}")
 
 
 
