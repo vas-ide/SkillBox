@@ -31,9 +31,23 @@
 
 # TODO тут ваш код
 from src.bowling import get_score, Bowling
+from argparse import ArgumentParser, Namespace
 
+parser = ArgumentParser()
+parser.add_argument('first_inf', type=str, help='Game statistic')
+parser.add_argument("-r", "--result", help="Game statistic additional", action="store_true")
+
+args: Namespace = parser.parse_args()
+
+if args.result:
+    print(f"{'*' * 30:<5}")
+    print(f"{args.first_inf:<12} ---> {get_score(args.first_inf):>12}")
+    print(f"{'*' * 30:<5}")
+    print(f"{args}")
+
+else:
+    print(f"{args.first_inf:<12} ---> {get_score(args.first_inf):>12}")
 
 # При написании кода помнить, что заказчик может захотеть доработок и новых возможностей...
 # И, возможно, вам пригодится паттерн проектирования "Состояние",
 #   см https://clck.ru/Fudd8 и https://refactoring.guru/ru/design-patterns/state
-
