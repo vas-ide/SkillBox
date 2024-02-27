@@ -3,7 +3,7 @@
 # stream_handler.setLevel(logging.INFO)
 # stream_handler.setFormatter(logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s", "%b %d %Y %H:%M:%S"))
 # log.addHandler(stream_handler)
-# file_handler = logging.FileHandler("log_crf/log.txt")
+# file_handler = logging.FileHandler("log_src/log.txt")
 # file_handler.setLevel(logging.DEBUG)
 # file_handler.setFormatter(logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s", "%b %d %Y %H:%M:%S"))
 # log.addHandler(file_handler)

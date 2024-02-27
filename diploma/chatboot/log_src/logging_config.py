@@ -21,13 +21,13 @@ log_config = {
         "errors_handler": {
             "class": "logging.FileHandler",
             "formatter": "errors_formatter",
-            "filename": "log_crf/errors.log",
+            "filename": "log_src/errors.log",
             "encoding": "UTF-8",
         },
         "chat_handler": {
             "class": "logging.FileHandler",
             "formatter": "chat_formatter",
-            "filename": "log_crf/chat.log",
+            "filename": "log_src/chat.log",
             "encoding": "UTF-8",
         },
     },
