@@ -1,4 +1,3 @@
-community_id = 224818713
 
 
 dict_questions = {

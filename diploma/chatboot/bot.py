@@ -3,9 +3,12 @@ import random
 import vk_api
 import logging
 from logging.config import dictConfig
+try:
+    import settings
+except ImportError:
+    exit(f"Copy 'settings.py.default' to settings.py and set token")
 
-from _token import token
-from info import community_id, dict_questions
+from info import dict_questions
 from log_crf.logging_config import log_config
 
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
@@ -16,7 +19,16 @@ chat_log = logging.getLogger('chat')
 
 
 class Bot:
+    """
+    Echo bot for vk.com
+
+    We use Python 3.12.1
+    """
     def __init__(self, community_id, token):
+        """
+        :param community_id: group_id vk.com
+        :param token: secret token from vk.com
+        """
         self.community_id = community_id
         self.token = token
         self.vk = vk_api.VkApi(token=token)
@@ -24,6 +36,9 @@ class Bot:
         self.api = self.vk.get_api()
 
     def run(self):
+        """
+        Run the bot.
+        """
         for event in self.long_poller.listen():
             try:
                 self.on_event(event)
@@ -31,7 +46,10 @@ class Bot:
                 errors_log.exception("Exception occurred")
                 pass
 
-    def on_event(self, event):
+    def on_event(self, event: VkBotEventType):
+        """
+        Analyse event and send message.
+        """
         cur_date = datetime.datetime.now(datetime.UTC).strftime("%b %d %Y %H:%M:%S")
         if event.type == VkBotEventType.MESSAGE_NEW:
 
@@ -59,6 +77,6 @@ class Bot:
 
 
 if __name__ == '__main__':
-    bot = Bot(community_id=community_id, token=token)
+    bot = Bot(community_id=settings.COMMUNITY_ID, token=settings.TOKEN)
     bot.run()
     pass
