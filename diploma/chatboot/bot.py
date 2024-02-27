@@ -1,28 +1,18 @@
-
-
 import datetime
 import random
 import vk_api
 import logging
+from logging.config import dictConfig
 
 from _token import token
 from info import community_id, dict_questions
+from log_crf.logging_config import log_config
 
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 
-log = logging.getLogger("bot")
-
-stream_handler = logging.StreamHandler()
-stream_handler.setLevel(logging.INFO)
-stream_handler.setFormatter(logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s","%b %d %Y %H:%M:%S"))
-
-file_handler = logging.FileHandler("logging/log.txt")
-file_handler.setLevel(logging.DEBUG)
-file_handler.setFormatter(logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s","%b %d %Y %H:%M:%S"))
-
-log.addHandler(stream_handler)
-log.addHandler(file_handler)
-log.setLevel(logging.DEBUG)
+logging.config.dictConfig(log_config)
+errors_log = logging.getLogger('errors')
+chat_log = logging.getLogger('chat')
 
 
 class Bot:
@@ -38,7 +28,7 @@ class Bot:
             try:
                 self.on_event(event)
             except Exception:
-                log.exception("Exception occurred")
+                errors_log.exception("Exception occurred")
                 pass
 
     def on_event(self, event):
@@ -46,7 +36,7 @@ class Bot:
         if event.type == VkBotEventType.MESSAGE_NEW:
 
             message_received = f"{event.object.message["text"]}"
-            log.debug("Message received %s", message_received)
+            chat_log.debug("Message received %s", message_received)
             message_reply = None
             if message_received.split()[0].lower() in dict_questions:
                 message_reply = dict_questions[message_received.split()[0].lower()]
@@ -58,12 +48,12 @@ class Bot:
                 # peer_id=event.object.message["from_id"],
 
             )
-            log.debug("Message received %s", message_reply)
+            chat_log.debug("Message received %s", message_reply)
         elif event.type == VkBotEventType.MESSAGE_REPLY:
-            log.debug("Message received type-%s----->Unable to process this type of massages", event.type)
+            chat_log.debug("Message received type-%s----->Unable to process this type of massages", event.type)
             pass
         else:
-            log.info("Message received type-%s----->Unable to process this type of massages", event.type)
+            chat_log.info("Message received type-%s----->Unable to process this type of massages", event.type)
             raise ValueError
             pass
 
