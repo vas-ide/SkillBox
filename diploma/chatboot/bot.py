@@ -52,7 +52,7 @@ class Bot:
             pass
         else:
             log.debug("Message received type-%s----->Unable to process this type of massages", event.type)
-            raise ValueError('testing')
+
             pass
 
 
