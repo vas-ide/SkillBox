@@ -2,12 +2,20 @@ community_id = 224818713
 
 
 dict_questions = {
-    "Hello": "How are you?",
-    "Date": "Today's date",
-    "Time": "Today's time",
-    "What": "We didn't catch you question",
-    "Category": "What do you think?",
-    "Cat": "What do you think?",
-    "Dog": "What do you think?",
+    "hello": "How are you?",
+    "date": "Today's date",
+
+
+    "problem": "Please tell me about you problem.",
+    "describe": "Describe your problem.",
+
+
+    "what": "We didn't catch you question",
+    "why": "We didn't have full information to analyze your issue",
+
+
+    "pet": "Please chose a category you pets",
+    "cat": "What is the problem with you Cat?",
+    "dog": "What is the problem with you Dog?",
 
 }
