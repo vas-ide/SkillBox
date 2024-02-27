@@ -24,14 +24,12 @@ class Bot:
     def on_event(self, event):
         cur_date = datetime.datetime.now(datetime.UTC)
         if event.type == VkBotEventType.MESSAGE_NEW:
-            # print(f"{event.type:<35}\n{event.object}\n{event.object.message["text"]}")
             message_request = f"{event.object.message["text"]}"
             message_reply = None
             if message_request.split()[0].lower() in dict_questions:
                 message_reply = dict_questions[message_request.split()[0].lower()]
             self.api.messages.send(
-                message=f""
-                        f"{cur_date.date()}\n"
+                message=f"{cur_date.date()}\n"
                         f"{message_reply}",
                 random_id=random.randint(0, 2 ** 20),
                 peer_id=event.object.message["from_id"],
