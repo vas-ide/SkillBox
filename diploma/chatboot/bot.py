@@ -14,11 +14,11 @@ log = logging.getLogger("bot")
 
 stream_handler = logging.StreamHandler()
 stream_handler.setLevel(logging.INFO)
-stream_handler.setFormatter(logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s"))
+stream_handler.setFormatter(logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s","%b %d %Y %H:%M:%S"))
 
 file_handler = logging.FileHandler("logging/log.txt")
 file_handler.setLevel(logging.DEBUG)
-file_handler.setFormatter(logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s"))
+file_handler.setFormatter(logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s","%b %d %Y %H:%M:%S"))
 
 log.addHandler(stream_handler)
 log.addHandler(file_handler)
@@ -42,7 +42,7 @@ class Bot:
                 pass
 
     def on_event(self, event):
-        cur_date = datetime.datetime.now(datetime.UTC)
+        cur_date = datetime.datetime.now(datetime.UTC).strftime("%b %d %Y %H:%M:%S")
         if event.type == VkBotEventType.MESSAGE_NEW:
 
             message_received = f"{event.object.message["text"]}"
@@ -51,7 +51,7 @@ class Bot:
             if message_received.split()[0].lower() in dict_questions:
                 message_reply = dict_questions[message_received.split()[0].lower()]
             self.api.messages.send(
-                message=f"{cur_date.date()}\n"
+                message=f"{cur_date}\n"
                         f"{message_reply}",
                 random_id=random.randint(0, 2 ** 20),
                 peer_id=event.object.message["peer_id"],
@@ -63,7 +63,8 @@ class Bot:
             log.debug("Message received type-%s----->Unable to process this type of massages", event.type)
             pass
         else:
-            log.debug("Message received type-%s----->Unable to process this type of massages", event.type)
+            log.info("Message received type-%s----->Unable to process this type of massages", event.type)
+            raise ValueError
             pass
 
 
