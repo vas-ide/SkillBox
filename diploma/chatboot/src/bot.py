@@ -63,7 +63,6 @@ class Bot:
                         f"{message_reply}",
                 random_id=random.randint(0, 2 ** 20),
                 peer_id=event.object.message["peer_id"],
-                # peer_id=event.object.message["from_id"],
 
             )
             # chat_log.debug("Message received %s", message_reply)
