@@ -2,7 +2,7 @@ import datetime
 import random
 import vk_api
 import logging
-from logging.config import dictConfig
+# from logging.config import dictConfig
 try:
     import settings
 except ImportError:
