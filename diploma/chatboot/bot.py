@@ -13,9 +13,9 @@ from log_src.logging_config import log_config
 
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 
-logging.config.dictConfig(log_config)
-errors_log = logging.getLogger('errors')
-chat_log = logging.getLogger('chat')
+# logging.config.dictConfig(log_config)
+# errors_log = logging.getLogger('errors')
+# chat_log = logging.getLogger('chat')
 
 
 class Bot:
@@ -43,7 +43,7 @@ class Bot:
             try:
                 self.on_event(event)
             except Exception:
-                errors_log.exception("Exception occurred")
+                # errors_log.exception("Exception occurred")
                 pass
 
     def on_event(self, event: VkBotEventType):
@@ -54,7 +54,7 @@ class Bot:
         if event.type == VkBotEventType.MESSAGE_NEW:
 
             message_received = f"{event.object.message["text"]}"
-            chat_log.debug("Message received %s", message_received)
+            # chat_log.debug("Message received %s", message_received)
             message_reply = None
             if message_received.split()[0].lower() in dict_questions:
                 message_reply = dict_questions[message_received.split()[0].lower()]
@@ -65,12 +65,12 @@ class Bot:
                 peer_id=event.object.message["peer_id"],
 
             )
-            chat_log.debug("Message received %s", message_reply)
+            # chat_log.debug("Message received %s", message_reply)
         elif event.type == VkBotEventType.MESSAGE_REPLY:
-            chat_log.debug("Message received type-%s----->Unable to process this type of massages", event.type)
+            # chat_log.debug("Message received type-%s----->Unable to process this type of massages", event.type)
             pass
         else:
-            chat_log.info("Message received type-%s----->Unable to process this type of massages", event.type)
+            # chat_log.info("Message received type-%s----->Unable to process this type of massages", event.type)
             raise ValueError
             pass
 
