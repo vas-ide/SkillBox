@@ -60,12 +60,3 @@ class TestChatBotUni(TestCase):
             random_id=ANY,
             peer_id=self.RAW_EVENT["object"]["message"]["peer_id"],
         )
-
-
-
-
-
-# python -m unittest -c test_chatbot_uni.TestChatBotUni
-# coverage run -m unittest
-# coverage run --source=bot -m unittest
-# coverage report -m
