@@ -43,8 +43,10 @@ class Bond:
             'москва': "Moscow",
             'токио': "Tokio",
         }
-        self.analizing_lst = []
-
+        self.analizing_lst_csv = []
+        self.analizing_lst_json = []
+        self.month_statistics_dict = {}
+        self.month_statistics_lst = []
 
     def analize(self):
         with open(self.information, 'r', encoding="utf8") as file_with_data:
@@ -53,24 +55,50 @@ class Bond:
         for key, value in data.items():
             date = datetime.strptime(re.search(self.re_date, value)[1], "%d%m%y").strftime("%Y-%m-%d")
             city = re.search(self.re_city, value)[1]
-            maney = Decimal(re.search(self.re_money, value)[1]) * self.exchanges[city]
-            self.analizing_lst.append({
+            money = Decimal(re.search(self.re_money, value)[1]) * self.exchanges[city]
+            self.analizing_lst_csv.append({
+                "date": date,
+                "city": city,
+                "money": f"{money.quantize(Decimal('1.00'), ROUND_HALF_EVEN)}",
+            })
+            self.analizing_lst_json.append({
                 'date': date,
                 'city': self.swap_cities[city],
-                "maney": maney
+                "money": f"{money.quantize(Decimal('1.00'), ROUND_HALF_EVEN)}",
             })
+            date_inf = f"{date[:-3]}".strip()
+            if date_inf not in self.month_statistics_dict:
+                self.month_statistics_dict[date_inf] = money
+            else:
+                self.month_statistics_dict[date_inf] += money
+        for key, value in self.month_statistics_dict.items():
+            self.month_statistics_dict[key] = f"{value.quantize(Decimal('1.00'), ROUND_HALF_EVEN)}"
+        # for key, value in self.month_statistics_dict.items():
+        #     self.month_statistics_lst.append({key: value})
 
 
     def days_statistics(self):
-        with open(f"days_stat.json", 'a', encoding="utf8") as file_with_data:
-            # json.dump(self.analizing_lst, file_with_data)
+        with open(f"{self.path_statistic}days_stat.json", 'w', encoding="utf8", newline="") as file_json:
+            json.dump(self.analizing_lst_json, file_json, indent=4)
+        with open(f"{self.path_statistic}days_stat.csv", 'w', encoding="utf8", newline="") as file_csv:
+            writer = csv.DictWriter(file_csv, delimiter=',', fieldnames=['date', 'city', 'money'])
+            writer.writeheader()
+            writer.writerows(self.analizing_lst_csv)
 
-            pass
+    def month_statistics(self):
+        with open(f"{self.path_statistic}month_stat.json", 'w', encoding="utf8", newline="") as file_json:
+            json.dump(self.month_statistics_dict, file_json, indent=4)
+        # with open(f"{self.path_statistic}month_stat.csv", 'w', encoding="utf8", newline="") as file_csv:
+        #     writer = csv.DictWriter(file_csv, delimiter=',', fieldnames=['Year_&_month', 'money'])
+        #     writer.writeheader()
+        #     writer.writerows(self.month_statistics_lst)
+
 
     def run(self):
         self.analize()
         self.days_statistics()
-        pprint(self.analizing_lst)
+        self.month_statistics()
+
 
 bond = Bond('external_data/Bond.json', '')
 bond.run()
