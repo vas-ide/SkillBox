@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import json
+
 # С помощью JSON файла rpg.json задана "карта" подземелья.
 # Подземелье было выкопано монстрами и они всё ещё скрываются где-то в его глубинах,
 # планируя набеги на близлежащие поселения.
@@ -48,7 +50,25 @@ remaining_time = '1234567890.0987654321'
 # если изначально не писать число в виде строки - теряется точность!
 field_names = ['current_location', 'current_experience', 'current_date']
 
-# TODO тут ваш код
+
+
+def map_for_game():
+    with open("rpg.json", "r", encoding='utf8') as read_file:
+        data = json.load(read_file)
+        print(data)
+        print(type(data))
+
+        # data_str = json.load(file)
+        # data_dict = json.loads(file)
+        # [print(key, '\n', value) for key, value in data_str.items()]
+        # [print(key, '\n', value) for key, value in data_dict.items()]
+        # print(data)
+        # for key, value in data.items():
+        #     print(key, "\n", value)
+
+
+
+map_for_game()
 
 # Учитывая время и опыт, не забывайте о точности вычислений!
 
