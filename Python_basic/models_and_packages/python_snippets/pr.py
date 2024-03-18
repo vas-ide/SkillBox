@@ -25,8 +25,9 @@ from decimal import Decimal, ROUND_HALF_EVEN
 
 class Bond:
 
-    def __init__(self, information):
+    def __init__(self, information, path_statistic):
         self.information = information
+        self.path_statistic = path_statistic
         self.re_date = r'jbd(\d{6})'
         self.re_city = r'jbc(\w+)jbc'
         self.re_money = r'jbe(\d+\.\d+)jbe'
@@ -36,7 +37,14 @@ class Bond:
             'москва': Decimal(0.12),  # рубли -> фунт
             'токио': Decimal(0.7),  # японские йены -> фунт
         }
+        self.swap_cities = {
+            'лондон': "London",
+            'берлин': "Berlin",
+            'москва': "Moscow",
+            'токио': "Tokio",
+        }
         self.analizing_lst = []
+
 
     def analize(self):
         with open(self.information, 'r', encoding="utf8") as file_with_data:
@@ -46,11 +54,23 @@ class Bond:
             date = datetime.strptime(re.search(self.re_date, value)[1], "%d%m%y").strftime("%Y-%m-%d")
             city = re.search(self.re_city, value)[1]
             maney = Decimal(re.search(self.re_money, value)[1]) * self.exchanges[city]
-            self.analizing_lst.append([date, city, maney])
+            self.analizing_lst.append({
+                'date': date,
+                'city': self.swap_cities[city],
+                "maney": maney
+            })
+
+
+    def days_statistics(self):
+        with open(f"days_stat.json", 'a', encoding="utf8") as file_with_data:
+            # json.dump(self.analizing_lst, file_with_data)
+
+            pass
 
     def run(self):
         self.analize()
+        self.days_statistics()
         pprint(self.analizing_lst)
 
-bond = Bond('external_data/Bond.json')
+bond = Bond('external_data/Bond.json', '')
 bond.run()
