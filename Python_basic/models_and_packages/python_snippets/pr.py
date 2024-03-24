@@ -73,10 +73,11 @@ class Bond:
                 self.month_statistics_dict[date_inf] += money
         for key, value in self.month_statistics_dict.items():
             self.month_statistics_dict[key] = f"{value.quantize(Decimal('1.00'), ROUND_HALF_EVEN)}"
-        # for key, value in self.month_statistics_dict.items():
-        #     self.month_statistics_lst.append({key: value})
 
-
+            self.month_statistics_lst.append({
+                "date": key,
+                "money": f"{value.quantize(Decimal('1.00'), ROUND_HALF_EVEN)}",
+            })
     def days_statistics(self):
         with open(f"{self.path_statistic}days_stat.json", 'w', encoding="utf8", newline="") as file_json:
             json.dump(self.analizing_lst_json, file_json, indent=4)
@@ -86,13 +87,14 @@ class Bond:
             writer.writerows(self.analizing_lst_csv)
 
     def month_statistics(self):
+        print(self.analizing_lst_csv)
+        print(self.month_statistics_dict)
         with open(f"{self.path_statistic}month_stat.json", 'w', encoding="utf8", newline="") as file_json:
             json.dump(self.month_statistics_dict, file_json, indent=4)
-        # with open(f"{self.path_statistic}month_stat.csv", 'w', encoding="utf8", newline="") as file_csv:
-        #     writer = csv.DictWriter(file_csv, delimiter=',', fieldnames=['Year_&_month', 'money'])
-        #     writer.writeheader()
-        #     writer.writerows(self.month_statistics_lst)
-
+        with open(f"{self.path_statistic}month_stat.csv", 'w', encoding="utf8", newline="") as file_csv:
+            writer = csv.DictWriter(file_csv, delimiter=',', fieldnames=['date', 'money'])
+            writer.writeheader()
+            writer.writerows(self.month_statistics_lst)
 
     def run(self):
         self.analize()
