@@ -1,33 +1,79 @@
 INTENTS = [
     {
         "name": "Date to inspect",
-        "tokens": ("", "", "", "", ""),
-        "scenario": "",
+        "tokens": ("когда", "дата", "день", "", ""),
+        "scenario": None,
+        "answer": f"At your convenience",
+        "idea": "",
+    },
+    {
+        "name": "Place for pet inspection",
+        "tokens": ("где", "место", "локация", "адрес", "улица", "дом"),
+        "scenario": None,
+        "answer": f"Eysk city, Rostovskay street №___",
+        "idea": "",
+    },
+    {
+        "name": "Coast",
+        "tokens": ("стоит", "", "", "", ""),
+        "scenario": None,
+        "answer": f"Initial examination by a pet doctor about 10 dollars",
+        "idea": "",
+    },
+    {
+        "name": "Registration",
+        "tokens": ("регистрация", "авторизация", "добавить", "зайти", ""),
+        "scenario": f"registration",
         "answer": None,
         "idea": "",
     },
     {
-        "name": "",
+        "name": "Example",
         "tokens": ("", "", "", "", ""),
-        "scenario": "",
-        "answer": None,
-        "idea": "",
-    },
-    {
-        "name": "",
-        "tokens": ("", "", "", "", ""),
-        "scenario": "",
-        "answer": None,
-        "idea": "",
-    },
-    {
-        "name": "",
-        "tokens": ("", "", "", "", ""),
-        "scenario": "",
-        "answer": None,
+        "scenario": None,
+        "answer": f"",
         "idea": "",
     },
 ]
+
+SCENARIOS = {
+    "registration": {
+        "first_step": "step1",
+        "step1": {
+            "text": "",
+            "failure_text": "",
+            "handler": "",
+            "next_step": "",
+        },
+        "step2": {
+            "text": "",
+            "failure_text": "",
+            "handler": "",
+            "next_step": "",
+        },
+        "step3": {
+            "text": "",
+            "failure_text": "",
+            "handler": "",
+            "next_step": "",
+        },
+        "step4": {
+            "text": "",
+            "failure_text": "",
+            "handler": "",
+            "next_step": "",
+        },
+        "step5": {
+            "text": "",
+            "failure_text": "",
+            "handler": "",
+            "next_step": "",
+        },
+    }
+}
+
+
+
 
 dict_questions = {
     "hello": "How are you?",
