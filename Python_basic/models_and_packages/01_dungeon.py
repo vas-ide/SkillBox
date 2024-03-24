@@ -60,12 +60,25 @@ class Game:
         with open("rpg.json", "r", encoding='utf8') as read_file:
             self.map = json.load(read_file)
     def print_map(self):
+        if type(self.map) == dict:
+            for key, value in self.map.items():
+                print(f"{key}")
+
+                pass
+        elif type(self.map) == list:
+            for item in self.map:
+                pass
+            pass
+        print(self.map)
+
 
         pass
 
 
     def run(self):
         self.map_for_game()
+        self.print_map()
+
         pass
 
 

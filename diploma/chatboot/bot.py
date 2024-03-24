@@ -34,6 +34,7 @@ class Bot:
         self.vk = vk_api.VkApi(token=token)
         self.long_poller = VkBotLongPoll(vk=self.vk, group_id=self.community_id)
         self.api = self.vk.get_api()
+        self.user_states = dict()
 
     def run(self):
         """
