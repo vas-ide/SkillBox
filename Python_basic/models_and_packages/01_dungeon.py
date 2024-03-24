@@ -51,12 +51,23 @@ remaining_time = '1234567890.0987654321'
 field_names = ['current_location', 'current_experience', 'current_date']
 
 
+class Game:
+    def __init__(self):
+        self.map = None
+        pass
 
-def map_for_game():
-    with open("rpg.json", "r", encoding='utf8') as read_file:
-        data = json.load(read_file)
-        print(data)
-        print(type(data))
+    def map_for_game(self):
+        with open("rpg.json", "r", encoding='utf8') as read_file:
+            self.map = json.load(read_file)
+    def print_map(self):
+
+        pass
+
+
+    def run(self):
+        self.map_for_game()
+        pass
+
 
         # data_str = json.load(file)
         # data_dict = json.loads(file)
@@ -66,9 +77,8 @@ def map_for_game():
         # for key, value in data.items():
         #     print(key, "\n", value)
 
-
-
-map_for_game()
+game = Game()
+game.run()
 
 # Учитывая время и опыт, не забывайте о точности вычислений!
 
