@@ -40,22 +40,22 @@ SCENARIOS = {
     "registration": {
         "first_step": "step1",
         "step1": {
-            "text": "",
-            "failure_text": "",
-            "handler": "",
-            "next_step": "",
+            "text": "Для регистрации введите имя.",
+            "failure_text": "Вы введи непраильное(менее 5 или более 35 символов) имя или имя которого не существует",
+            "handler": "handle_name",
+            "next_step": "step2",
         },
         "step2": {
-            "text": "",
-            "failure_text": "",
-            "handler": "",
-            "next_step": "",
+            "text": "Введите ваш Email. Для обратной связи",
+            "failure_text": "Неправильный адрес. Проверьте и введите еще раз.",
+            "handler": "handler_email",
+            "next_step": "step3",
         },
         "step3": {
-            "text": "",
-            "failure_text": "",
-            "handler": "",
-            "next_step": "",
+            "text": "Congratulation {name} we send details to {email}",
+            "failure_text": None,
+            "handler": None,
+            "next_step": None,
         },
         "step4": {
             "text": "",
@@ -72,7 +72,7 @@ SCENARIOS = {
     }
 }
 
-
+DEFAULT_ANSWER = "Please tell me about you problem and we try to solve it or inform you how avoid issue"
 
 
 dict_questions = {
