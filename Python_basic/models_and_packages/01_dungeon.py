@@ -62,9 +62,7 @@ class Game:
         self.experience = int(experience)
         self.map = None
         self.monsters_lst = []
-        self.monsters_dict = {}
         self.location_lst = []
-        self.location_dict = {}
         self.reg_mon = r"_exp(\d{1,5})_"
         self.reg_time = r"_tm(\d{1,20})"
         pass
@@ -139,13 +137,13 @@ class Game:
                                             if counter == answer_add:
                                                 self.map = item
                             except ValueError:
-                                print(f"Попробуйте еще раз")
+                                print(f"\nПопробуйте еще раз\n")
                         else:
                             self.map = [item for item in value if type(item) == dict]
                     elif answer == 3:
                         self.marker = False
                 except ValueError:
-                    print(f"Попробуйте еще раз")
+                    print(f"\nПопробуйте еще раз\n")
 
 
     def run(self):
