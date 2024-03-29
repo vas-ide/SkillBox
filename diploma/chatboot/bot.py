@@ -66,8 +66,9 @@ class Bot:
         if event.type != VkBotEventType.MESSAGE_NEW:
             chat_log.info("Message received type-%s----->Unable to process this type of massages", event.type)
             return
-        user_id = event.object.peer_id
-        text = event.object.text
+
+        user_id = event.object.message["peer_id"]
+        text = event.object.message["text"]
 
         if user_id in self.user_states:
             text_to_send = self.continue_scenario(user_id, text)
@@ -83,9 +84,9 @@ class Bot:
                 text_to_send = info.DEFAULT_ANSWER
 
         self.api.messages.send(
-            message=text_to_send,
+            message=f"{text}",
             random_id=random.randint(0, 2 ** 20),
-            peer_id=user_id
+            peer_id=event.object.message["peer_id"],
         )
 
     def start_scenario(self, user_id, scenario_name):
