@@ -21,13 +21,25 @@ class Radio:
     def run(self):
         self.top_list()
 
+
 radio = Radio()
 radio.run()
 
 
-# url = f"https://dzen.ru/"
-# response = requests.get(url)
-# if response.status_code == 200:
-#     html_doc = bs(response.text, features="html.parser")
-# else:
-#     print(f"Some Error {response.status_code}")
+class Dzen:
+    def __init__(self):
+        self.url = f"https://dzen.ru/"
+        self.response = requests.get(self.url)
+
+    def info(self):
+        if self.response.status_code == 200:
+            html_doc = bs(self.response.text, features="html.parser")
+        else:
+            print(f"Some Error {self.response.status_code}")
+
+    def run(self):
+        self.info()
+
+
+dzen = Dzen()
+dzen.run()
