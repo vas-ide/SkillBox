@@ -33,9 +33,12 @@ class Dzen:
 
     def info(self):
         if self.response.status_code == 200:
-            html_doc = bs(self.response.text, features="html.parser")
-            block_item = html_doc.find("div", {"class": "currency-rates__wrapper-10"})
-            print(block_item)
+            html_doc = bs(self.response.content, features="html.parser")
+            # block_item = html_doc.find_all(attrs={"class": "header-widgets__rates-ii"})
+            # print(block_item)
+
+
+
             # item_name = html_doc.find("a")["currency-rates__rate-fu"]
             # item_value= html_doc.find("a").find("span")["currency-rates__rateValue-2X"]
             # # item_name = html_doc.find_all("span", {"class": "currency-rates__rateValue-2X"})
@@ -50,5 +53,34 @@ class Dzen:
         self.info()
 
 
-dzen = Dzen()
-dzen.run()
+# dzen = Dzen()
+# dzen.run()
+
+
+class TheWeatherNetworkRostov:
+    def __init__(self):
+        self.url = f"https://www.theweathernetwork.com/ru/weather/rostovskaya/rostov-na-donu"
+        self.response = requests.get(self.url)
+
+    def info(self):
+        if self.response.status_code == 200:
+            html_doc = bs(self.response.content, features="html.parser")
+            block_item = html_doc.find_all("span",{"class": "temp"})
+            print(block_item)
+
+
+
+            # item_name = html_doc.find("a")["currency-rates__rate-fu"]
+            # item_value= html_doc.find("a").find("span")["currency-rates__rateValue-2X"]
+            # # item_name = html_doc.find_all("span", {"class": "currency-rates__rateValue-2X"})
+            # # item_value = html_doc.find_all("div", {"class": "header-widgets__widgetWrapper-1X"})
+            # print(f"{item_name}\n{item_value}")
+        else:
+            print(f"Some Error {self.response.status_code}")
+
+    def run(self):
+        self.info()
+
+
+rostov = TheWeatherNetworkRostov()
+rostov.run()
